@@ -1,0 +1,7 @@
+# Các tệp trong site/ đã dựng sẵn, không có bước build. Hàm nằm ở netlify/functions.
+[build]
+  publish = "site"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"

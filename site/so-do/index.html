@@ -1,0 +1,1835 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0b7d6e" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15201d" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-title" content="Sổ đo">
+<link rel="icon" href="/so-do/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/so-do/icon-180.png">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>Sổ đo tại nhà</title>
+<meta name="description" content="Sổ ghi số đo, thói quen mỗi ngày; số đo tự gửi về cho bác sĩ">
+<meta name="sdtn-page" content="5">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;600;700&family=Tinos:wght@400;700&display=swap&subset=vietnamese">
+<style>
+[hidden]{display:none!important}
+:root{
+  
+  --bg:#f3f8f6; --surface:#ffffff; --surface-2:#eaf3ef; --surface-3:#dcebe4;
+  --ink:#14261f; --ink-2:#38514a; --muted:#56706a; --line:#d8e7e0; --line-2:#bcd4ca;
+  --accent:#0b7d6e; --accent-ink:#ffffff; --accent-soft:#dcf1eb; --accent-line:#93d0c2; --accent-deep:#07665a;
+  --sun:#f5a524; --sun-soft:#fff3d6; --sun-deep:#a35f00;
+  --hero:linear-gradient(135deg,#dff4ec 0%,#f2faf6 55%,#fff4dc 100%);
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#6250d6; --s5:#9a7b4f;
+  --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
+  --good-ink:#0a6a0a; --warn-ink:#7d5200; --serious-ink:#9a4620; --crit-ink:#a32626;
+  --good-bg:#e6f4e4; --warn-bg:#fdf1d6; --serious-bg:#fbe7de; --crit-bg:#f8e0de; --info-bg:#e0f2ee;
+  --z-good:#bfe3bb; --z-ok:#dcefd6; --z-warn:#f9df94; --z-serious:#f4bc9e; --z-crit:#ec9e9e; --z-info:#c4e6de; --z-none:#e3e9e6;
+  --band:rgba(12,163,12,.09); --chart:#fcfdfc; --grid:#e3ece8; --axis:#bccbc4; --target:#6250d6;
+  --shadow:0 1px 2px rgba(16,40,32,.06), 0 0 0 1px rgba(16,40,32,.045);
+  --radius:14px;
+  --ui:Arial, Arimo, "Liberation Sans", Helvetica, sans-serif;
+  --serif:"Times New Roman", Tinos, "Liberation Serif", Times, serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1614; --surface:#15201d; --surface-2:#1b2925; --surface-3:#22332e;
+    --ink:#e6f1ed; --ink-2:#bfd3cc; --muted:#8fa69f; --line:#24342f; --line-2:#33463f;
+    --accent:#4fd1b5; --accent-ink:#05231d; --accent-soft:#123a32; --accent-line:#2b6a5c; --accent-deep:#7fe0c9;
+    --sun:#f7b84a; --sun-soft:#3a2c10; --sun-deep:#ffcf7a;
+    --hero:linear-gradient(135deg,#12332b 0%,#15201d 55%,#33280f 100%);
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#9085e9; --s5:#b8996b;
+    --good-ink:#5fd35f; --warn-ink:#f6c25a; --serious-ink:#f09a76; --crit-ink:#ff8a8a;
+    --good-bg:#16301a; --warn-bg:#352a10; --serious-bg:#3a2218; --crit-bg:#3d1c1c; --info-bg:#143029;
+    --z-good:#2a5a2e; --z-ok:#24402a; --z-warn:#6b5419; --z-serious:#6e3b24; --z-crit:#6e2b2b; --z-info:#1f4a41; --z-none:#2a3532;
+    --band:rgba(12,163,12,.16); --chart:#141e1b; --grid:#22302c; --axis:#3d4f49; --target:#9085e9;
+    --shadow:0 0 0 1px rgba(255,255,255,.06);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1614; --surface:#15201d; --surface-2:#1b2925; --surface-3:#22332e;
+  --ink:#e6f1ed; --ink-2:#bfd3cc; --muted:#8fa69f; --line:#24342f; --line-2:#33463f;
+  --accent:#4fd1b5; --accent-ink:#05231d; --accent-soft:#123a32; --accent-line:#2b6a5c; --accent-deep:#7fe0c9;
+  --sun:#f7b84a; --sun-soft:#3a2c10; --sun-deep:#ffcf7a;
+  --hero:linear-gradient(135deg,#12332b 0%,#15201d 55%,#33280f 100%);
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#9085e9; --s5:#b8996b;
+  --good-ink:#5fd35f; --warn-ink:#f6c25a; --serious-ink:#f09a76; --crit-ink:#ff8a8a;
+  --good-bg:#16301a; --warn-bg:#352a10; --serious-bg:#3a2218; --crit-bg:#3d1c1c; --info-bg:#143029;
+  --z-good:#2a5a2e; --z-ok:#24402a; --z-warn:#6b5419; --z-serious:#6e3b24; --z-crit:#6e2b2b; --z-info:#1f4a41; --z-none:#2a3532;
+  --band:rgba(12,163,12,.16); --chart:#141e1b; --grid:#22302c; --axis:#3d4f49; --target:#9085e9;
+  --shadow:0 0 0 1px rgba(255,255,255,.06);
+  color-scheme:dark;
+}
+
+/* ===== Sổ đo tại nhà: base, sized for readers over 60 (20px base on phones) ===== */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;font-size:125%}
+@media (min-width:900px){html{font-size:118.75%}}
+body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:1rem;line-height:1.55;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--surface);z-index:30}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:700;line-height:1.25;text-wrap:balance;margin:0}
+h2{font-size:1.4rem} h3{font-size:1.15rem}
+p{margin:0}
+a{color:var(--accent)}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.ic{width:22px;height:22px;flex:0 0 auto;display:inline-block;vertical-align:middle}
+.ic.sm{width:18px;height:18px} .ic.lg{width:28px;height:28px} .ic.xl{width:36px;height:36px}
+.muted{color:var(--muted)} .small{font-size:.86rem} .tiny{font-size:.78rem}
+.num{font-variant-numeric:tabular-nums}
+.big{font-size:1.9rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+.big small{font-size:.8rem;font-weight:400;color:var(--muted);margin-left:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;min-width:0}
+.card-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;margin-bottom:12px}
+.card-head h3{display:flex;align-items:center;gap:8px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr))}
+.stack{display:flex;flex-direction:column;gap:12px;min-width:0}
+.row{display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center}
+.sec-head{display:flex;flex-direction:column;gap:4px}
+.sec-head p{color:var(--ink-2);font-size:.95rem;max-width:62ch}
+.chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 11px 3px 9px;font-size:.82rem;font-weight:700;white-space:nowrap;line-height:1.5}
+.chip .dot{width:9px;height:9px;border-radius:50%;flex:0 0 9px}
+.st-good{background:var(--good-bg);color:var(--good-ink)} .st-good .dot{background:var(--good)}
+.st-warn{background:var(--warn-bg);color:var(--warn-ink)} .st-warn .dot{background:var(--warn)}
+.st-crit{background:var(--crit-bg);color:var(--crit-ink)} .st-crit .dot{background:var(--crit)}
+.st-info{background:var(--info-bg);color:var(--accent-deep)} .st-info .dot{background:var(--accent)}
+.st-none{background:var(--surface-2);color:var(--ink-2)} .st-none .dot{background:var(--line-2)}
+.note{border-left:4px solid var(--accent);background:var(--info-bg);padding:12px 14px;border-radius:8px;font-size:.95rem}
+.note.warn{border-color:var(--warn);background:var(--warn-bg)}
+.note.crit{border-color:var(--crit);background:var(--crit-bg)}
+.note.good{border-color:var(--good);background:var(--good-bg)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:2px solid var(--line-2);background:var(--surface);color:var(--ink);border-radius:12px;padding:10px 16px;min-height:52px;cursor:pointer;font-weight:700;font-size:1rem;text-align:center;line-height:1.25}
+.btn:hover{border-color:var(--accent)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-p{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn-p:hover{filter:brightness(1.06)}
+.btn-ghost{border-color:transparent;background:transparent;color:var(--accent-deep)}
+.btn-xl{width:100%;min-height:62px;font-size:1.12rem;border-radius:14px}
+a.btn{text-decoration:none}
+.zl-no{font-variant-numeric:tabular-nums;white-space:nowrap}
+.btn-danger{color:var(--crit-ink);border-color:var(--crit-bg)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.toast{position:fixed;left:50%;bottom:calc(98px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;font-size:1rem;font-weight:700;z-index:90;max-width:calc(100% - 32px);box-shadow:0 6px 20px rgba(0,0,0,.25);text-align:center}
+
+/* ===== header and bottom navigation ===== */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.top-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-block:10px}
+.brand{display:flex;flex-direction:column;min-width:0}
+.brand-k{font-family:var(--serif);font-weight:700;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-deep)}
+.brand b{font-size:1.15rem;line-height:1.2}
+.top .btn{min-height:46px;padding:6px 12px;font-size:.92rem}
+main{padding-block:18px calc(112px + env(safe-area-inset-bottom,0px))}
+.screen{display:flex;flex-direction:column;gap:18px}
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:25;background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -4px 16px rgba(16,40,32,.06);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.bnav-in{max-width:860px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.bnav button{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:74px;border:0;border-top:4px solid transparent;background:transparent;color:var(--ink-2);font-weight:700;font-size:.8rem;cursor:pointer;padding:6px 2px;line-height:1.15}
+.bnav button .ic{width:28px;height:28px}
+.bnav button[aria-current="page"]{color:var(--accent-deep);border-top-color:var(--accent);background:var(--accent-soft)}
+.bnav .count{position:absolute;top:6px;left:calc(50% + 8px);min-width:24px;height:24px;border-radius:12px;background:var(--sun);color:#3d2600;font-size:.78rem;display:grid;place-items:center;padding:0 6px}
+
+/* ===== who is using ===== */
+.chooser{display:flex;flex-direction:column;gap:16px;padding-top:12px}
+.chooser h2{font-size:1.6rem}
+.who-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px}
+.who{display:flex;align-items:center;gap:16px;padding:20px;border-radius:18px;border:2px solid var(--line-2);background:var(--surface);cursor:pointer;text-align:left;min-height:96px;font-size:1.35rem;font-weight:700;font-family:var(--serif)}
+.who:hover{border-color:var(--accent)}
+.who .av{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent-deep);flex:0 0 58px}
+.who .av .ic{width:30px;height:30px}
+
+/* ===== entry forms ===== */
+input[type=date],input[type=time],textarea,input[type=text]{background:var(--surface);border:2px solid var(--line-2);border-radius:12px;padding:10px 12px;min-height:56px;font-size:1.05rem;width:100%;min-width:0}
+
+.kinds{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,140px),1fr));gap:10px}
+@media (max-width:520px){.kinds{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kind{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:92px;padding:10px 6px;border-radius:16px;border:2px solid var(--line);background:var(--surface);color:var(--ink);font-weight:700;font-size:1rem;cursor:pointer;text-align:center;line-height:1.2}
+.kind .ic{width:32px;height:32px;color:var(--accent)}
+.kind[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.kind[aria-pressed="true"] .ic{color:var(--accent-ink)}
+.form{display:flex;flex-direction:column;gap:18px}
+.form h3{display:flex;align-items:center;gap:10px;font-size:1.25rem}
+fieldset{border:0;margin:0;padding:0;min-width:0;display:flex;flex-direction:column;gap:10px}
+legend{font-weight:700;font-size:1.02rem;padding:0;margin-bottom:10px}
+.numgrid{display:flex;flex-direction:column;gap:12px}
+.numf{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:6px 12px;padding:10px 12px;border-radius:14px;background:var(--surface-2)}
+.numf .nl{display:flex;flex-direction:column;font-weight:700;font-size:1.05rem;line-height:1.25}
+.numf .nl small{font-weight:400;font-size:.84rem;color:var(--ink-2)}
+.numf input[type=text]{width:5.2ch;font-size:1.9rem;font-weight:700;text-align:center;padding:6px 4px;border-radius:12px;border:2px solid var(--line-2);background:var(--surface);font-variant-numeric:tabular-nums;min-height:62px}
+.numf input[type=text].wide{width:6.4ch}
+.numf .unit{font-size:.9rem;color:var(--ink-2);min-width:4.2ch}
+.numf.bad{box-shadow:inset 0 0 0 2px var(--crit)}
+.ferr{color:var(--crit-ink);font-weight:700;font-size:.92rem}
+.seglg{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px}
+.seglg button,.pick{min-height:56px;border-radius:12px;border:2px solid var(--line-2);background:var(--surface);font-weight:700;font-size:1rem;cursor:pointer;padding:8px 10px;line-height:1.2}
+.seglg button[aria-pressed="true"],.pick[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.picks{display:flex;flex-wrap:wrap;gap:8px}
+.pick{min-height:50px;border-radius:999px;padding:8px 16px}
+.painscale{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:6px}
+@media (max-width:640px){.painscale{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.painscale button{min-height:58px;border-radius:12px;border:2px solid transparent;font-size:1.3rem;font-weight:700;cursor:pointer;color:var(--ink);font-variant-numeric:tabular-nums}
+.painscale button[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 3px var(--surface) inset;transform:scale(1.04)}
+.painscale .pz-good{background:var(--z-good)} .painscale .pz-ok{background:var(--z-ok)} .painscale .pz-warn{background:var(--z-warn)} .painscale .pz-serious{background:var(--z-serious)} .painscale .pz-crit{background:var(--z-crit)}
+.pain-word{font-weight:700;font-size:1.05rem;min-height:1.6em}
+.when{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:10px 12px;border-radius:12px;background:var(--surface-2)}
+.when b{font-variant-numeric:tabular-nums}
+.when .btn{min-height:44px;padding:6px 12px;font-size:.92rem}
+.when-edit{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:10px;width:100%}
+.when-edit label{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:.9rem}
+textarea{min-height:96px;resize:vertical;line-height:1.45}
+.howto{border-radius:12px;background:var(--surface-2);padding:10px 14px}
+.howto summary{cursor:pointer;font-weight:700;color:var(--accent-deep);min-height:40px;display:flex;align-items:center}
+.howto ol{margin:6px 0 4px;padding-left:24px;display:flex;flex-direction:column;gap:6px}
+.result{display:flex;flex-direction:column;gap:12px;border-left:6px solid var(--accent)}
+.result.good{border-left-color:var(--good)} .result.warn{border-left-color:var(--warn)} .result.crit{border-left-color:var(--crit)} .result.info{border-left-color:var(--accent)}
+.result .r-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.result .r-val{display:flex;flex-direction:column;gap:2px}
+.result .r-val b{font-size:1.7rem;line-height:1.2;font-variant-numeric:tabular-nums}
+.result .r-val span{color:var(--ink-2)}
+.result .r-adv{font-size:1.05rem}
+.result .r-xp{display:inline-flex;align-items:center;gap:6px;color:var(--sun-deep);font-weight:700}
+.celebrate{display:flex;align-items:center;gap:14px;padding:16px;border-radius:18px;background:var(--sun-soft);border:2px solid var(--sun)}
+.celebrate .b-medal{width:64px;height:64px;flex:0 0 64px;background:var(--sun);color:#3d2600}
+.celebrate .b-medal .ic{width:34px;height:34px}
+.celebrate b{display:block;font-family:var(--serif);font-size:1.25rem}
+.celebrate div{flex:1 1 auto;min-width:0}
+.celebrate .btn{min-height:44px}
+
+/* ===== send ===== */
+.steps{margin:0;padding:0;list-style:none;counter-reset:st;display:flex;flex-direction:column;gap:10px}
+.steps li{counter-increment:st;display:grid;grid-template-columns:40px minmax(0,1fr);gap:10px;align-items:start;font-size:1.02rem}
+.steps li::before{content:counter(st);width:36px;height:36px;border-radius:50%;background:var(--accent-soft);color:var(--accent-deep);font-weight:700;display:grid;place-items:center}
+#msg{font-size:.86rem;line-height:1.45;min-height:150px;background:var(--surface-2)}
+.check-row{display:flex;align-items:center;gap:12px;min-height:52px;font-size:1rem;cursor:pointer}
+.check-row input{width:28px;height:28px;flex:0 0 28px;accent-color:var(--accent)}
+
+/* ===== history ===== */
+.hist{display:flex;flex-direction:column;gap:14px}
+.hday h3{font-size:1.08rem;margin-bottom:8px}
+.hitems{display:flex;flex-direction:column;gap:8px;list-style:none;margin:0;padding:0}
+.hitem{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px 12px;align-items:center;padding:10px 12px;border-radius:14px;background:var(--surface-2)}
+.hitem .hi-ic{width:42px;height:42px;border-radius:12px;background:var(--surface);color:var(--accent);display:grid;place-items:center}
+.hitem .hi-t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.hitem .hi-t b{font-size:1rem;line-height:1.35;overflow-wrap:anywhere}
+.hitem .hi-t small{color:var(--ink-2);font-size:.85rem}
+.hitem .hi-act{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.hitem .btn{min-height:40px;padding:4px 10px;font-size:.84rem;border-width:1px}
+@media (max-width:520px){.hitem{grid-template-columns:auto minmax(0,1fr)}.hitem .hi-act{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center}}
+.chart-wrap{position:relative}
+.chart-wrap svg{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.88rem;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:18px;height:4px;border-radius:2px}
+.legend i.tg{height:0;border-top:2px dashed var(--good)}
+.ctip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:.82rem;font-weight:700;padding:6px 10px;border-radius:8px;white-space:nowrap;transform:translate(-50%,-115%);z-index:3}
+.ax{font:14px var(--ui);fill:var(--muted)}
+.c-grid{stroke:var(--grid);stroke-width:1}
+.c-tg{stroke:var(--good);stroke-width:2;stroke-dasharray:6 5}
+.c-l0,.c-l1{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.c-l0{stroke:var(--s1)} .c-l1{stroke:var(--s2)}
+.c-p0,.c-p1{stroke:var(--surface);stroke-width:2}
+.c-p0{fill:var(--s1)} .c-p1{fill:var(--s2)}
+.c-hit{fill:transparent;cursor:pointer}
+.legend i.lg0{background:var(--s1)} .legend i.lg1{background:var(--s2)}
+.foot{color:var(--muted);font-size:.84rem;display:flex;flex-direction:column;gap:6px;padding-top:6px;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ===== daily page on the phone ===== */
+.daily>.note{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;font-size:1rem}
+.daily>.note .btn{min-height:48px}
+.fc-habits{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.fc-habits li{display:grid;grid-template-columns:minmax(0,1fr) minmax(70px,90px) auto;align-items:center;gap:10px;font-size:.92rem}
+.fc-habits b{font-variant-numeric:tabular-nums;min-width:2.6ch;text-align:right}
+.welcome h3{display:flex;align-items:center;gap:8px}
+.welcome .ic{color:var(--sun-deep)}
+
+/* ===== v3: sửa số đo, trạng thái gửi ===== */
+.edit-note{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.edit-note .btn{min-height:46px}
+.hi-btns{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+.note .ic.sm{vertical-align:-3px}
+
+/* ===== chế độ nhúng: trang chạy trong khung của bảng theo dõi (?embed=1), khung tự co theo chiều cao nội dung ===== */
+html.embed body{min-height:0;display:flex;flex-direction:column;background:transparent}
+html.embed body::before{display:none}
+html.embed .top,html.embed .toast{display:none}
+html.embed main{padding-block:14px 8px}
+html.embed main.wrap{padding-left:0;padding-right:0}
+html.embed .bnav{position:static;order:-1;border:1px solid var(--line);border-radius:14px;box-shadow:none;overflow:hidden;padding:0}
+html.embed .bnav button{min-height:64px}
+
+/* ===== daily habits page (dashboard tab and home-entry page) ===== */
+.daily{display:flex;flex-direction:column;gap:18px}
+.dl-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 28px;align-items:center;padding:22px 24px;border-radius:20px;background:var(--hero);box-shadow:var(--shadow)}
+.dl-hello{display:flex;flex-direction:column;gap:6px;min-width:0}
+.dl-date{color:var(--ink-2);font-weight:600;font-size:1rem}
+.dl-hello h2{font-size:clamp(1.9rem,4.6vw,2.6rem);color:var(--ink);letter-spacing:.2px}
+.dl-motto{font-size:1.08rem;color:var(--ink-2);max-width:46ch}
+.dl-stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.dl-stat{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border-radius:999px;padding:7px 14px 7px 10px;font-size:1rem;box-shadow:var(--shadow)}
+.dl-stat .ic{color:var(--sun-deep);width:22px;height:22px}
+.dl-stat b{font-size:1.12rem;font-variant-numeric:tabular-nums}
+.dl-level{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
+.lv-ring{width:128px;height:128px;flex:0 0 128px}
+.lv-track{fill:var(--surface);stroke:var(--line);stroke-width:10}
+.lv-fill{fill:none;stroke:var(--sun);stroke-width:10;stroke-linecap:round}
+.lv-cap{font:700 12px var(--ui);letter-spacing:2px;fill:var(--ink-2)}
+.lv-num{font:700 36px var(--ui);fill:var(--ink)}
+.dl-lvtext{display:flex;flex-direction:column;gap:6px;min-width:min(190px,100%);flex:1 1 160px}
+.dl-lvtext b{font-family:var(--serif);font-size:1.45rem;color:var(--accent-deep)}
+.dl-xp{font-size:1.05rem;font-weight:700;font-variant-numeric:tabular-nums}
+.dl-lvtext small{color:var(--ink-2);font-size:.95rem}
+.dv-bar{display:block;height:12px;border-radius:999px;background:var(--surface-3);overflow:hidden;min-width:120px}
+.dv-bar i{display:block;height:100%;border-radius:999px;background:var(--accent)}
+.dv-bar.sun i{background:var(--sun)}
+.dv-bar.good i{background:var(--good)}
+.dl-prog{display:flex;align-items:center;gap:10px;min-width:220px;font-size:1rem}
+.dl-prog .dv-bar{flex:1 1 140px}
+.habits{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:10px}
+.habits li{display:flex}
+.habits li>.habit{flex:1 1 auto}
+.daily .sec-head h3{display:flex;gap:8px;align-items:center}
+.habit{width:100%;display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;align-items:center;gap:12px;text-align:left;background:var(--surface-2);border:2px solid transparent;border-radius:16px;padding:12px 14px;min-height:76px;font:inherit;color:inherit}
+button.habit{cursor:pointer}
+button.habit:hover{border-color:var(--accent-line)}
+button.habit:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.hb-check{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:2px solid var(--line-2);color:var(--muted)}
+.hb-check .ic{width:22px;height:22px}
+.hb-ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--surface);color:var(--accent)}
+.hb-ic .ic{width:26px;height:26px}
+.hb-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.hb-txt b{font-size:1.08rem;line-height:1.3}
+.hb-txt small{color:var(--ink-2);font-size:.92rem;line-height:1.35}
+.hb-xp{font-weight:700;color:var(--sun-deep);font-size:1rem;font-variant-numeric:tabular-nums}
+.habit.done{background:var(--accent-soft);border-color:var(--accent-line)}
+.habit.done .hb-check{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.habit.auto .hb-check{border-style:dashed}
+.habit.auto.done .hb-check{border-style:solid}
+.quests{display:flex;flex-direction:column;gap:14px}
+.quest{display:flex;flex-direction:column;gap:6px}
+.q-top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.q-top b{font-size:1.04rem}
+.q-xp{display:inline-flex;align-items:center;gap:4px;color:var(--sun-deep);font-weight:700;white-space:nowrap}
+.quest small{color:var(--ink-2);font-variant-numeric:tabular-nums}
+.quest.done .q-xp{color:var(--good-ink)}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.badge{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:12px 8px;border-radius:14px;background:var(--surface-2);color:var(--muted)}
+.badge b{font-size:.98rem;color:var(--ink-2)}
+.badge small{font-size:.85rem;line-height:1.3}
+.b-medal{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--surface-3);color:var(--muted)}
+.b-medal .ic{width:28px;height:28px}
+.badge.got{background:var(--sun-soft);color:var(--ink-2)}
+.badge.got b{color:var(--ink)}
+.badge.got .b-medal{background:var(--sun);color:#3d2600;box-shadow:0 0 0 4px var(--surface)}
+.focus{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:12px}
+.fc{display:flex;flex-direction:column;gap:10px}
+.fc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.fc-top b{font-family:var(--serif);font-size:1.18rem}
+.fc-goal,.fc-tip{display:flex;gap:8px;align-items:flex-start;font-size:1rem}
+.fc-goal{color:var(--accent-deep);font-weight:600}
+.fc-tip{color:var(--ink-2)}
+.fc-tip .ic{color:var(--good)}
+.fc-now{display:flex;flex-direction:column;gap:2px}
+.fc-now .big{font-size:1.8rem}
+.remember{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:9px;font-size:1.02rem}
+.dl-agenda{display:flex;flex-direction:column;gap:10px}
+.ag-row{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center}
+.ag-row b{display:block;font-size:1.04rem}
+.ag-row small{color:var(--ink-2);font-size:.95rem}
+.dbox{width:58px;min-height:58px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--accent-soft);color:var(--accent-deep);line-height:1.1}
+.dbox b{font-size:1.3rem}
+.dbox small{font-size:.78rem;font-weight:600}
+.dbox.todo{background:var(--sun-soft);color:var(--sun-deep)}
+.dl-sos{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:16px;background:var(--crit-bg);color:var(--ink);font-size:1.02rem}
+.dl-sos .ic{color:var(--crit-ink);flex:0 0 auto}
+@media (max-width:720px){
+  .dl-hero{grid-template-columns:1fr;padding:18px 16px}
+  .dl-level{justify-content:flex-start}
+  .lv-ring{width:108px;height:108px;flex-basis:108px}
+  .habit{grid-template-columns:auto minmax(0,1fr) auto;padding:12px}
+  .habit .hb-ic{display:none}
+}
+
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/><path d="M6.5 12h3l1.4-2.2 2 4.2 1.4-2h3.2"/></symbol>
+<symbol id="i-kidney" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4c-3 0-4.6 2.4-4.6 4.6 0 1.3.7 2 .7 3.4s-.7 2.1-.7 3.4c0 2.2 1.6 4.6 4.6 4.6s5-3.5 5-8-2-8-5-8z"/><path d="M11 12H8a2.5 2.5 0 0 0-2.5 2.5V21"/></symbol>
+<symbol id="i-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s6.2 6.6 6.2 10.8a6.2 6.2 0 0 1-12.4 0C5.8 10.1 12 3.5 12 3.5z"/><path d="M9.5 14.5a2.6 2.6 0 0 0 2.5 2.5"/></symbol>
+<symbol id="i-stomach" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v4.2c0 1.4 1.1 2.3 2.5 2.3h1.3a5.7 5.7 0 0 1 5.7 5.8c0 3.7-3.2 6.2-7.2 6.2-2.6 0-4.6-1.2-5.6-3"/><path d="M9 9.8C6.8 10.6 5.6 12.4 5.6 14.6"/></symbol>
+<symbol id="i-liver" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5C3.5 6.8 6.5 5 11.5 5h5.5c2.5 0 3.8 1.5 3.8 3.4 0 4.2-5.3 9.6-10.3 9.6-4.1 0-7-3.6-7-8.5z"/><path d="M11 5.2c.5 3 .4 6.5-1.5 9.5"/></symbol>
+<symbol id="i-bone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16.8 9.4c.9.9 2.4.9 3.2 0s.9-2.4 0-3.2c-.4-.4-1-.6-1.6-.6.1-.6-.1-1.2-.6-1.6-.9-.9-2.4-.9-3.2 0s-.9 2.4 0 3.2L7.4 14.6c-.9-.9-2.4-.9-3.2 0s-.9 2.4 0 3.2c.4.4 1 .6 1.6.6-.1.6.1 1.2.6 1.6.9.9 2.4.9 3.2 0s.9-2.4 0-3.2z"/></symbol>
+<symbol id="i-spine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="2.8" width="7" height="4" rx="1.2"/><rect x="8.5" y="8.6" width="7" height="4" rx="1.2"/><rect x="8.5" y="14.4" width="7" height="4" rx="1.2"/><path d="M6 4.8h2.5M15.5 10.6H18M6 16.4h2.5M12 18.4v3"/></symbol>
+<symbol id="i-lungs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5v8"/><path d="M12 10c-1.2.2-2.3 1-2.3 1V6.8c0-1.1-1-1.6-2-1.1C5.1 7.1 3.5 11 3.5 15c0 2.2 1.1 3.6 3 3.6 2.5 0 3.2-1.9 3.2-4"/><path d="M12 10c1.2.2 2.3 1 2.3 1V6.8c0-1.1 1-1.6 2-1.1 2.6 1.4 4.2 5.3 4.2 9.3 0 2.2-1.1 3.6-3 3.6-2.5 0-3.2-1.9-3.2-4"/></symbol>
+<symbol id="i-ear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 9a4.8 4.8 0 0 1 9.6 0c0 2.6-1.6 3.6-2.6 4.7-.9 1-1.1 1.9-1.1 3.3a2.7 2.7 0 0 1-4.9 1.6"/><path d="M10.6 9.4a1.7 1.7 0 0 1 3.4 0c0 1.2-1.2 1.6-1.7 2.3"/></symbol>
+<symbol id="i-thyroid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8.5v8"/><path d="M12 10.5c-.9-3.3-3.6-5.4-5.6-4.5s-2.6 3.8-1.5 6.8 4.3 4.9 7.1 4.2"/><path d="M12 10.5c.9-3.3 3.6-5.4 5.6-4.5s2.6 3.8 1.5 6.8-4.3 4.9-7.1 4.2"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.3l7.3 3v5.2c0 4.6-3.1 7.8-7.3 9.2-4.2-1.4-7.3-4.6-7.3-9.2V6.3z"/><path d="M8.8 12l2.2 2.2 4.3-4.4"/></symbol>
+<symbol id="i-cells" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="9" r="4.5"/><circle cx="8.5" cy="9" r="1.6"/><circle cx="16" cy="15.5" r="4.5"/><circle cx="16" cy="15.5" r="1.6"/></symbol>
+<symbol id="i-hand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5V5.6a1.5 1.5 0 0 1 3 0V11"/><path d="M11 10V4.5a1.5 1.5 0 0 1 3 0V11"/><path d="M14 10.5V6.2a1.5 1.5 0 0 1 3 0v7.6c0 4-2.6 6.7-6.2 6.7-2.5 0-4-1.4-5.4-3.9l-1.8-3.1a1.5 1.5 0 0 1 2.6-1.5L8 13.6"/></symbol>
+<symbol id="i-ribbon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6c-1.9 0-3.1 1.4-3.1 3.1 0 2.1 1.6 4.2 3.1 6.7 1.5-2.5 3.1-4.6 3.1-6.7 0-1.7-1.2-3.1-3.1-3.1z"/><path d="M10.4 10.8L6.6 19.6l2.6-.8 1.1 2.4 3.4-7.4"/><path d="M13.6 10.8l3.8 8.8-2.6-.8-1.1 2.4-1.5-3.3"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19.2 14.6A7.7 7.7 0 1 1 9.4 4.8a6.1 6.1 0 0 0 9.8 9.8z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.6v2M12 19.4v2M2.6 12h2M19.4 12h2M5.4 5.4l1.4 1.4M17.2 17.2l1.4 1.4M5.4 18.6l1.4-1.4M17.2 6.8l1.4-1.4"/></symbol>
+<symbol id="i-sunrise" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 18a6.5 6.5 0 0 1 13 0"/><path d="M3 18h18M3 21h18"/><path d="M12 3.5v5M9.5 6L12 3.5 14.5 6M4.6 11.6l1.4 1M19.4 11.6l-1.4 1"/></symbol>
+<symbol id="i-sunset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 18a6.5 6.5 0 0 1 13 0"/><path d="M3 18h18M3 21h18"/><path d="M12 3.5v5M9.5 6l2.5 2.5L14.5 6M4.6 11.6l1.4 1M19.4 11.6l-1.4 1"/></symbol>
+<symbol id="i-pill" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.2 20.2a5.1 5.1 0 0 1-7.2-7.2l6.8-6.8a5.1 5.1 0 0 1 7.2 7.2z"/><path d="M6.6 9.6l7.2 7.2"/></symbol>
+<symbol id="i-syringe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 3.5l6 6M17.5 6.5l-9.8 9.8a1.6 1.6 0 0 1-2.2 0l-.8-.8a1.6 1.6 0 0 1 0-2.2L14.5 3.5"/><path d="M5.2 18.8L3 21M8 10l2 2M10.8 7.2l2 2"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.2"/><path d="M3.5 9.6h17M8 3v4M16 3v4M7.5 13.5h2M11 13.5h2M14.5 13.5h2M7.5 17h2M11 17h2"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3.5h5M10.5 3.5v5.6L5 18.6a1.6 1.6 0 0 0 1.4 2.4h11.2a1.6 1.6 0 0 0 1.4-2.4L13.5 9.1V3.5"/><path d="M7.4 14.5h9.2"/></symbol>
+<symbol id="i-steth" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5v5a4 4 0 0 0 8 0v-5"/><path d="M9 12.5v2a5 5 0 0 0 10 0V12.6"/><circle cx="19" cy="10.4" r="2.1"/></symbol>
+<symbol id="i-scan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="2.5"/><path d="M12 6.5v11M8 9.2c1.2.9 2.4 1.2 4 1.2s2.8-.3 4-1.2M8 14.8c1.2-.9 2.4-1.2 4-1.2s2.8.3 4 1.2"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5H7.2A2.2 2.2 0 0 0 5 5.7v12.6a2.2 2.2 0 0 0 2.2 2.2h9.6a2.2 2.2 0 0 0 2.2-2.2V8.5z"/><path d="M14 3.5v5h5M8.5 13h7M8.5 16.5h5"/></symbol>
+<symbol id="i-rx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="4.5" width="15" height="16" rx="2.2"/><path d="M9 3.5h6v2.5H9z"/><path d="M9 10h2.8a1.6 1.6 0 0 1 0 3.2H9V10zm0 3.2V17M11.4 13.2l3.6 3.8M15 13.2l-2.6 2.6"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 4.6L2.8 17.8a2 2 0 0 0 1.7 3h15a2 2 0 0 0 1.7-3L13.7 4.6a2 2 0 0 0-3.4 0z"/><path d="M12 9.5v4.5M12 17.2v.3"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.2 4h3.4l1.6 4.1-2.1 1.5a11.6 11.6 0 0 0 6.3 6.3l1.5-2.1 4.1 1.6v3.4A1.6 1.6 0 0 1 18.4 20C10.5 20 4 13.5 4 5.6A1.6 1.6 0 0 1 5.2 4z"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+<symbol id="i-nobeer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 8h8v10.5a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2z"/><path d="M14.5 10.5h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2"/><path d="M6.5 5.5c1.5-1.2 3.2-1.2 4.5 0 1.3-1.2 2.6-1.2 3.5-.3"/><path d="M3.5 3.5l17 17"/></symbol>
+<symbol id="i-salt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10h8l-1.2 10H9.2z"/><path d="M9 10a3 3 0 0 1 6 0"/><path d="M11 5.5h.01M13 5.5h.01M12 3.8h.01"/></symbol>
+<symbol id="i-stretch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.6" r="1.8"/><path d="M12 7.4v6.6l-3 6.5M12 14l3 6.5"/><path d="M5 4.5l7 5 7-5"/></symbol>
+<symbol id="i-balance" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.6" r="1.8"/><path d="M12 7.4V21"/><path d="M5 10.5l7-1.8 7 1.8"/><path d="M12 14.5l4.5 3"/></symbol>
+<symbol id="i-knee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v6.5c0 1.6.8 2.6 2.2 3.2L15 14.5 13 21"/><path d="M14.5 3v5.5"/><circle cx="12.4" cy="12.6" r="1.4"/></symbol>
+<symbol id="i-plate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="12" r="7"/><circle cx="13" cy="12" r="3.4"/><path d="M3.5 4v5.5a1.5 1.5 0 0 0 3 0V4M5 9.5V20"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8.5 5.5-14 14-14 0 8.5-5.5 14-14 14z"/><path d="M5 19l8.5-8.5"/></symbol>
+<symbol id="i-legs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3v8l-1.8 9.5h2.8l1.5-6.5 1.5 6.5h2.8L14.5 11V3"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4"/><path d="M12 13v4M9 20.5h6M10 17h4v3.5h-4z"/></symbol>
+<symbol id="i-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4 0-6.5-2.7-6.5-6.3 0-3.6 3-5.6 3.6-9.2 2 1.6 3.1 3.6 3.1 5.3 1-1 1.6-2.1 1.7-3.7 2.1 1.9 4.6 4.8 4.6 7.7 0 3.6-2.5 6.2-6.5 6.2z"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.9L12 16.9l-5.2 2.8 1-5.9-4.3-4.1 5.9-.9z"/></symbol>
+<symbol id="i-medal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="15" r="5.2"/><path d="M8.6 3l3.4 6.8L15.4 3"/><path d="M12 12.6l.9 1.8 2 .3-1.5 1.4.4 2-1.8-.9-1.8.9.4-2-1.5-1.4 2-.3z"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10.5H9.5L4 19.5z"/><path d="M8 9h8M8 12h5"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11.5L20.5 4l-6.5 16.5-3.2-6.2z"/><path d="M10.8 14.3L20.5 4"/></symbol>
+<symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3.2l1.8-2.8h6l1.8 2.8H20v11H4z"/><circle cx="12" cy="13.3" r="3.4"/></symbol>
+<symbol id="i-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M18.5 16l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4"/><path d="M5 4.5h11.5l-2 4 2 4H5"/></symbol>
+<symbol id="i-cuff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.5" cy="12.5" r="6.5"/><path d="M9.5 12.5l2.8-2.8M6.3 12.5h.01M9.5 9.3v.01"/><path d="M16 12.5h1.6a2.4 2.4 0 0 1 2.4 2.4V21"/></symbol>
+<symbol id="i-scale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16.5" rx="3.2"/><path d="M8 9.6a5.6 5.6 0 0 1 8 0"/><path d="M12 10l1.6-2.2"/></symbol>
+<symbol id="i-face" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9 10h.01M15 10h.01M8.6 16.2c.9-1.1 2.1-1.7 3.4-1.7s2.5.6 3.4 1.7"/></symbol>
+<symbol id="i-meter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="15" rx="2.6"/><rect x="8.5" y="5.6" width="7" height="4.6" rx="1"/><path d="M12 18v3.5M10.5 13.6h3"/></symbol>
+<symbol id="i-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19.5h14"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6l-6 6 6 6"/></symbol>
+<symbol id="i-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6l6 6-6 6"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5.5M6.5 11L12 5.5 17.5 11"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13.5M6.5 13l5.5 5.5 5.5-5.5"/></symbol>
+<symbol id="i-flat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13.5M13 6.5l5.5 5.5-5.5 5.5"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5M12 14.5v2.2"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></symbol>
+<symbol id="i-walk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="4.5" r="1.9"/><path d="M9.5 21l2.2-6.2 2.8 2.7V21M11.7 14.8l-1-5 3-2.2 2.4 3.6H19M10.7 9.8L7.6 12v3"/></symbol>
+<symbol id="i-food" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12.5h17a8.5 8.5 0 0 1-17 0z"/><path d="M8 9c0-1.6 1.2-1.6 1.2-3.3M12 9c0-1.6 1.2-1.6 1.2-3.3M16 9c0-1.6 1.2-1.6 1.2-3.3"/></symbol>
+<symbol id="i-glass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h10l-1.3 7.6a3.7 3.7 0 0 1-7.4 0z"/><path d="M12 14.8v5.7M8.5 20.5h7M7.6 7.5h8.8"/></symbol>
+<symbol id="i-bed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18.5V6M3 14h18v4.5M21 14v-2.5A2.5 2.5 0 0 0 18.5 9H11v5"/><circle cx="7" cy="11" r="1.8"/></symbol>
+<symbol id="i-plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15.5l-8-5V5a1.5 1.5 0 0 0-3 0v5.5l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-4l8 2.5z"/></symbol>
+<symbol id="i-vein" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3.5c0 5-1 9-1 12.5 0 2.5 1.5 4.5 4 4.5h4.5"/><path d="M15 3.5c0 4 .5 8 .5 12"/><path d="M11.2 8.5c1 1 1 2 0 3s-1 2 0 3"/></symbol>
+<symbol id="i-person" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20.5c0-3.9 3.1-7 7-7s7 3.1 7 7"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.2M12 7.8v.2"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 8.5V6a1.5 1.5 0 0 0-1.5-1.5H6A1.5 1.5 0 0 0 4.5 6v8A1.5 1.5 0 0 0 6 15.5h2.5"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2.2"/><circle cx="9" cy="10" r="1.8"/><path d="M20.5 16l-5-5-9 8.5"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7.2A2.2 2.2 0 0 1 5.7 5h3.8l2 2.2h6.8a2.2 2.2 0 0 1 2.2 2.2v8.4a2.2 2.2 0 0 1-2.2 2.2H5.7a2.2 2.2 0 0 1-2.2-2.2z"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M7.5 14.5l3.5-4 3 2.5 5-6.5"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5L12 4l8 6.5V19a1.5 1.5 0 0 1-1.5 1.5h-4v-6h-5v6h-4A1.5 1.5 0 0 1 4 19z"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 5.5c2.6-1.2 5.1-1.2 7.5 0 2.4-1.2 4.9-1.2 7.5 0v13c-2.6-1.2-5.1-1.2-7.5 0-2.4-1.2-4.9-1.2-7.5 0z"/><path d="M12 5.5v13"/></symbol>
+<symbol id="i-todo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12.3l2.6 2.6L16 9.5"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 7h15"/><path d="M9.5 7V4.8h5V7"/><path d="M6.5 7l1 12.5h9l1-12.5"/><path d="M10 11v5.5M14 11v5.5"/></symbol><symbol id="i-thermo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4.8a2 2 0 0 1 4 0v8.9a4 4 0 1 1-4 0z"/><path d="M12 9.5v6.3"/><circle cx="12" cy="17" r="1.3"/></symbol><symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6.5h11M9 12h11M9 17.5h11"/><circle cx="4.8" cy="6.5" r="1.1"/><circle cx="4.8" cy="12" r="1.1"/><circle cx="4.8" cy="17.5" r="1.1"/></symbol></defs></svg>
+<header class="top"><div class="wrap top-row"><div class="brand"><span class="brand-k">Sổ đo tại nhà</span><b id="who-name"></b></div><button type="button" class="btn" id="who-switch" hidden><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-person"></use></svg>Đổi người</button></div></header>
+<main class="wrap" id="main"><p class="muted" style="padding-top:24px">Đang mở sổ...</p></main>
+<nav class="bnav" id="bnav" aria-label="Các trang" hidden><div class="bnav-in">
+<button type="button" data-screen="today"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-sun"></use></svg><span>Hôm nay</span></button>
+<button type="button" data-screen="entry"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>Nhập số đo</span></button>
+<button type="button" data-screen="send"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-send"></use></svg><span>Gửi BS</span><span class="count" id="nav-count" hidden></span></button>
+<button type="button" data-screen="history"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-list"></use></svg><span>Lịch sử</span></button>
+</div></nav>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<form name="so-do-tai-nha" method="POST" action="/so-do/da-nhan" data-netlify="true" netlify-honeypot="bot-field" hidden aria-hidden="true"><input type="hidden" name="form-name" value="so-do-tai-nha"><input type="text" name="summary"><input type="hidden" name="person"><input type="hidden" name="op"><input type="hidden" name="type"><input type="hidden" name="measured_at"><input type="hidden" name="sbp"><input type="hidden" name="dbp"><input type="hidden" name="pulse"><input type="hidden" name="arm"><input type="hidden" name="pain_score"><input type="hidden" name="pain_sites"><input type="hidden" name="pain_type"><input type="hidden" name="weight_kg"><input type="hidden" name="waist_cm"><input type="hidden" name="glucose_mmol_l"><input type="hidden" name="glucose_context"><input type="hidden" name="symptoms"><input type="hidden" name="severity"><input type="hidden" name="temp_c"><input type="hidden" name="habit_day"><input type="hidden" name="habits_done"><textarea name="note"></textarea><input type="hidden" name="entry_id"><input type="hidden" name="rev"><input type="hidden" name="op_id"><input type="hidden" name="device_id"><input type="hidden" name="saved_at"><input type="hidden" name="tz"><input type="hidden" name="app_version"><p hidden><label>Bỏ trống ô này<input name="bot-field"></label></p></form>
+<script type="application/json" id="cfg-data">{"generated": "2026-11-19", "game": {"levels": [0, 150, 400, 800, 1300, 2000, 2900, 4000, 5300, 7000], "names": ["Khởi động", "Làm quen", "Đều đặn", "Chăm chỉ", "Bền bỉ", "Vững vàng", "Gương mẫu", "Thành thạo", "Bậc thầy", "Huyền thoại"], "xp": {"bp": 10, "bp_max": 2, "weight": 15, "glucose": 5, "glucose_max": 2, "report": 2, "send": 5}}, "people": {"LTM": {"greet": "Chú Minh", "motto": "Mỗi ngày một thói quen tốt, thận và tim khoẻ bền lâu.", "habits": [{"id": "bp_am", "label": "Đo huyết áp buổi sáng", "hint": "Ngồi nghỉ 5 phút, đo trước khi uống thuốc", "icon": "cuff", "xp": 10, "auto": "bp_am"}, {"id": "bp_pm", "label": "Đo huyết áp buổi tối", "hint": "Trước khi đi ngủ", "icon": "cuff", "xp": 10, "auto": "bp_pm"}, {"id": "med", "label": "Uống thuốc đủ các buổi", "hint": "Sáng, trưa, chiều theo toa của BS", "icon": "pill", "xp": 10}, {"id": "walk", "label": "Đi bộ nhanh 30 phút", "hint": "Hoặc đạp xe, bơi; đi sau bữa ăn càng tốt", "icon": "walk", "xp": 10}, {"id": "water", "label": "Uống đủ 2 lít nước", "hint": "Khoảng 8 ly, uống rải đều trong ngày", "icon": "glass", "xp": 5}, {"id": "noalc", "label": "Không bia rượu", "hint": "Phải tiếp khách thì tối đa 1-2 ly", "icon": "nobeer", "xp": 5}, {"id": "light", "label": "Ăn nhạt, bớt đồ ngọt", "hint": "Bớt nước chấm, nước dùng, nước ngọt có đường", "icon": "salt", "xp": 5}, {"id": "stretch", "label": "Tập giãn cơ 10 phút", "hint": "Vai, hông, lưng; ngồi lâu thì đứng dậy mỗi 45 phút", "icon": "stretch", "xp": 5}, {"id": "sleep", "label": "Ngủ trước 23 giờ", "hint": "Ngủ đủ 7-8 tiếng", "icon": "moon", "xp": 5}], "weekly": [{"id": "q_bp", "label": "Đo huyết áp ít nhất 3 ngày", "goal": 3, "metric": "bp_days", "xp": 30}, {"id": "q_walk", "label": "Đi bộ 5 ngày", "goal": 5, "metric": "habit:walk", "xp": 40}, {"id": "q_noalc", "label": "Ít nhất 3 ngày không bia rượu", "goal": 3, "metric": "habit:noalc", "xp": 30}, {"id": "q_body", "label": "Cân và đo vòng eo 1 lần", "goal": 1, "metric": "weigh", "xp": 20}], "focus": [{"id": "bp", "title": "Huyết áp tại nhà", "goal": "Dưới 130/80 mmHg", "tip": "Đo sáng tối, ăn nhạt, đi bộ đều", "metric": "bp"}, {"id": "body", "title": "Cân nặng, vòng eo", "goal": "Mốc đầu khoảng 67 kg; vòng eo dưới 90 cm", "tip": "Cân mỗi tuần một lần vào buổi sáng; bớt tinh bột nhanh, thêm rau", "metric": "weight"}, {"id": "ua", "title": "Thận khoẻ, acid uric", "goal": "Acid uric dưới 360 µmol/L", "tip": "Uống đủ nước; bớt bia, nội tạng, hải sản có vỏ, nước ngọt", "habits_for": ["water", "noalc"]}, {"id": "ldl", "title": "Mỡ máu LDL-C", "goal": "Dưới 1.4 mmol/L", "tip": "Uống thuốc mỡ máu đều mỗi chiều; cá 2-3 bữa mỗi tuần, ít mỡ động vật", "habits_for": ["med", "walk", "light"]}, {"id": "a1c", "title": "Đường máu HbA1c", "goal": "Dưới 5.7%", "tip": "Bớt cơm trắng, bánh ngọt; đi bộ 10 phút sau bữa ăn", "habits_for": ["walk", "light"]}], "remember": ["Đau nhức: chỉ dùng thuốc giảm đau BS Trung đã dặn; không tự mua thuốc kháng viêm giảm đau.", "Giữ cổ an toàn: tránh ngửa cổ quá mức khi gội đầu, xoa bóp; tê hay yếu tay chân thì báo BS.", "Đi công tác: mang thuốc dư 7 ngày trong hành lý xách tay và máy đo huyết áp.", "Sốt, tiểu buốt: báo BS Trung trước khi dùng kháng sinh.", "Chụp CT có thuốc cản quang: báo BS trước để kiểm tra thận."], "agenda": [{"label": "Tái khám với BS Trung", "kind": "date", "when": "2027-01-17", "freq": "Mỗi 1-3 tháng"}, {"label": "Xét nghiệm máu, nước tiểu định kỳ", "kind": "date", "when": "2027-01-02", "freq": "Mỗi 3 tháng"}, {"label": "Đeo máy Holter, đo huyết áp 24 giờ", "kind": "planned", "when": "2026-10", "freq": "Một lần theo kế hoạch 10/2026"}, {"label": "Khám tai mũi họng", "kind": "date", "when": "2026-07-30", "freq": "Theo hẹn của BS"}, {"label": "Tiêm ngừa cúm mùa", "kind": "date", "when": "2026-01-21", "freq": "Mỗi năm trước mùa cúm"}, {"label": "Ghi tên vaccine phế cầu, zona đã tiêm", "kind": "todo", "when": "", "freq": "Theo loại vaccine"}], "slug": "minh", "match": ["minh"], "pron": "chú"}, "DTG": {"greet": "Dì Giang", "motto": "Xương chắc, dáng vững, tim khoẻ: mỗi ngày thêm một chút.", "habits": [{"id": "calcium", "label": "Đủ calci trong ngày", "hint": "Sữa hoặc sữa chua, đậu phụ, cá nhỏ, rau xanh đậm", "icon": "bone", "xp": 10}, {"id": "walk", "label": "Đi bộ 30 phút", "hint": "Đi bộ giúp xương chắc và tim khoẻ", "icon": "walk", "xp": 10}, {"id": "balance", "label": "Tập thăng bằng 10 phút", "hint": "Yoga, thái cực quyền, đứng một chân có tay vịn", "icon": "balance", "xp": 10}, {"id": "knee", "label": "Tập cơ đùi cho khớp gối", "hint": "Theo bài tập được hướng dẫn; tránh ngồi xổm sâu, quỳ lâu", "icon": "knee", "xp": 5}, {"id": "protein", "label": "Ăn đủ đạm mỗi bữa", "hint": "Cá, trứng, thịt gà, đậu", "icon": "plate", "xp": 5}, {"id": "lowfat", "label": "Ít mỡ động vật, đồ chiên", "hint": "Dùng dầu thực vật; cá béo 2 lần mỗi tuần", "icon": "leaf", "xp": 5}, {"id": "legs", "label": "Vận động cổ chân, không ngồi quá 1 giờ", "hint": "Kê chân cao khi nghỉ", "icon": "legs", "xp": 5}, {"id": "sleep", "label": "Ngủ đúng giờ", "hint": "Ăn tối trước khi ngủ 2-3 giờ; tránh điện thoại 1 giờ trước ngủ", "icon": "moon", "xp": 5}], "weekly": [{"id": "q_walk", "label": "Đi bộ 5 ngày", "goal": 5, "metric": "habit:walk", "xp": 40}, {"id": "q_balance", "label": "Tập thăng bằng 3 ngày", "goal": 3, "metric": "habit:balance", "xp": 30}, {"id": "q_bp", "label": "Đo huyết áp 2 lần", "goal": 2, "metric": "bp_count", "xp": 20}, {"id": "q_body", "label": "Cân và đo vòng eo 1 lần", "goal": 1, "metric": "weigh", "xp": 20}], "focus": [{"id": "bone", "title": "Xương chắc khoẻ", "goal": "Không té ngã; truyền thuốc xương đúng hẹn mỗi năm", "tip": "Calci từ sữa, đậu phụ; tập chịu lực và thăng bằng; nhà đủ sáng, thảm chống trơn", "metric": "habit:calcium", "habits_for": ["calcium", "balance"]}, {"id": "ldl", "title": "Mỡ máu LDL-C", "goal": "Dưới 1.8 mmol/L", "tip": "Ít mỡ động vật, đồ chiên; yến mạch, đậu, cá béo 2 lần mỗi tuần", "habits_for": ["lowfat", "walk"]}, {"id": "bp", "title": "Huyết áp", "goal": "Dưới 130/80 mmHg", "tip": "Đo 2 lần mỗi tuần để BS có số liệu", "metric": "bp"}, {"id": "body", "title": "Cân nặng, vòng eo", "goal": "Giữ cân ổn định; vòng eo dưới 80 cm", "tip": "Cân mỗi tuần một lần vào buổi sáng", "metric": "weight"}], "remember": ["Truyền thuốc xương mỗi năm một lần: giữ giấy ghi ngày truyền; trước khi truyền cần xét nghiệm máu theo hẹn.", "Phòng té ngã: đèn ngủ đủ sáng, thảm chống trơn nhà tắm, tay vịn cầu thang, không leo ghế.", "Không dùng thêm vitamin C liều cao hoặc thực phẩm chức năng khi chưa hỏi BS.", "Đi xa, đứng lâu: mang vớ áp lực, vận động cổ chân thường xuyên.", "Cổ vai: giữ cổ thẳng khi xem điện thoại, máy tính; tê hoặc yếu tay thì báo BS."], "agenda": [{"label": "Tái khám với BS Trung", "kind": "date", "when": "2027-01-02", "freq": "Mỗi 1-3 tháng"}, {"label": "Truyền thuốc xương mỗi năm", "kind": "todo", "when": "", "freq": "Mỗi năm một lần"}, {"label": "Xét nghiệm máu định kỳ", "kind": "date", "when": "2027-04-02", "freq": "Mỗi 3-6 tháng"}, {"label": "Khám vú định kỳ", "kind": "date", "when": "2027-02-24", "freq": "Mỗi năm"}, {"label": "Đo mật độ xương", "kind": "date", "when": "2026-08-02", "freq": "Mỗi 1-2 năm"}, {"label": "Tiêm ngừa cúm mùa", "kind": "date", "when": "2026-01-21", "freq": "Mỗi năm"}, {"label": "Ghi tên vaccine phế cầu, zona đã tiêm", "kind": "todo", "when": "", "freq": "Theo loại vaccine"}], "slug": "giang", "match": ["giang"], "pron": "dì"}}, "doctor_short": "BS Trung", "doctor_zalo": "0918353352", "page_version": "5", "sync": {"form": "so-do-tai-nha", "post": "/so-do/", "app": "5", "store": "/api/so-do"}}</script>
+<script>
+/* ===================== daily habits: shared engine (no DOM) =====================
+   Used by the dashboard tab "Mỗi ngày" and by the home-entry page. Entries share one shape:
+   {id, type: 'bp'|'pain'|'weight'|'glucose'|'symptom'|'meds'|'habit', t: ISO time, day?: 'YYYY-MM-DD', done?: [habit ids], ...}
+   Days are counted in Vietnam time (UTC+7), where the persons live. */
+var DG = (function () {
+  var VN = 7 * 3600000;
+  function dayOf(e) { if (e.day) return e.day; return new Date(Date.parse(e.t) + VN).toISOString().slice(0, 10); }
+  function hourOf(t) { return new Date(Date.parse(t) + VN).getUTCHours(); }
+  function todayVN() { return new Date(Date.now() + VN).toISOString().slice(0, 10); }
+  function addDays(day, n) { var d = new Date(day + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
+  function weekStart(day) { var d = new Date(day + 'T00:00:00Z'), w = (d.getUTCDay() + 6) % 7; return addDays(day, -w); }   // Monday
+  function noonISO(day) { return new Date(Date.parse(day + 'T12:00:00Z') - VN).toISOString(); }
+
+  // group entries by VN day: {day: {habits: Set-like obj, bp: n, bpAm, bpPm, weight: n, glu: n, report: n}}
+  function byDay(entries) {
+    var m = {};
+    entries.forEach(function (e) {
+      if (!e || !e.t || e.deleted) return;
+      var d = dayOf(e), x = m[d] || (m[d] = { habits: {}, bp: 0, bpAm: 0, bpPm: 0, weight: 0, glu: 0, report: 0, any: false });
+      x.any = true;
+      if (e.type === 'habit') (e.done || []).forEach(function (h) { x.habits[h] = 1; });
+      else if (e.type === 'bp') { x.bp++; if (hourOf(e.t) < 12) x.bpAm++; else x.bpPm++; }
+      else if (e.type === 'weight') x.weight++;
+      else if (e.type === 'glucose') x.glu++;
+      else if (e.type === 'pain' || e.type === 'symptom') x.report++;
+      else if (e.type === 'meds') x.habits.med = 1;
+    });
+    return m;
+  }
+  function doneSet(cfg, dayRec) {
+    var s = {};
+    if (!dayRec) return s;
+    Object.keys(dayRec.habits).forEach(function (h) { s[h] = 1; });
+    cfg.habits.forEach(function (h) {
+      if (h.auto === 'bp_am' && dayRec.bpAm) s[h.id] = 1;
+      if (h.auto === 'bp_pm' && dayRec.bpPm) s[h.id] = 1;
+    });
+    return s;
+  }
+  function dayXP(cfg, game, dayRec) {
+    if (!dayRec) return 0;
+    var xp = 0, X = game.xp, done = doneSet(cfg, dayRec);
+    cfg.habits.forEach(function (h) { if (!h.auto && done[h.id]) xp += h.xp; });
+    xp += Math.min(dayRec.bp, X.bp_max) * X.bp;
+    xp += Math.min(dayRec.weight, 1) * X.weight;
+    xp += Math.min(dayRec.glu, X.glucose_max) * X.glucose;
+    xp += Math.min(dayRec.report, 1) * X.report;
+    return xp;
+  }
+  function questValue(q, days, ws) {
+    var v = 0;
+    for (var i = 0; i < 7; i++) {
+      var r = days[addDays(ws, i)]; if (!r) continue;
+      if (q.metric === 'bp_days') v += r.bp ? 1 : 0;
+      else if (q.metric === 'bp_count') v += r.bp;
+      else if (q.metric === 'weigh') v += r.weight;
+      else if (q.metric.indexOf('habit:') === 0) v += r.habits[q.metric.slice(6)] ? 1 : 0;
+    }
+    return v;
+  }
+  function levelOf(game, xp) {
+    var L = game.levels, i = 0;
+    while (i + 1 < L.length && xp >= L[i + 1]) i++;
+    var next = L[i + 1], cur = L[i];
+    return { lv: i + 1, name: game.names[i], cur: cur, next: next || null, pct: next ? (xp - cur) / (next - cur) : 1, toNext: next ? next - xp : 0 };
+  }
+  function streaks(days, today) {
+    var s = 0, d = days[today] && days[today].any ? today : addDays(today, -1);
+    while (days[d] && days[d].any) { s++; d = addDays(d, -1); }
+    var keys = Object.keys(days).filter(function (k) { return days[k].any; }).sort(), best = 0, run = 0, prev = null;
+    keys.forEach(function (k) { run = prev && addDays(prev, 1) === k ? run + 1 : 1; best = Math.max(best, run); prev = k; });
+    return { cur: s, best: best };
+  }
+  function bpAvgWindow(entries, endDay, n) {
+    var from = addDays(endDay, -(n - 1)), xs = entries.filter(function (e) { var d = dayOf(e); return e.type === 'bp' && d >= from && d <= endDay; });
+    if (!xs.length) return null;
+    var s = 0, d = 0; xs.forEach(function (e) { s += e.sbp; d += e.dbp; });
+    return { n: xs.length, sbp: s / xs.length, dbp: d / xs.length };
+  }
+  // the whole state for one person
+  function compute(cfg, game, entries, today) {
+    today = today || todayVN();
+    var days = byDay(entries), keys = Object.keys(days).sort();
+    var xp = 0, xpToday = dayXP(cfg, game, days[today]);
+    keys.forEach(function (k) { xp += dayXP(cfg, game, days[k]); });
+    // weekly quests: every week that has any activity
+    var weeks = {}; keys.forEach(function (k) { weeks[weekStart(k)] = 1; });
+    var questsDone = 0, weekBest = {};
+    Object.keys(weeks).forEach(function (ws) {
+      cfg.weekly.forEach(function (q) {
+        var v = questValue(q, days, ws);
+        weekBest[q.id] = Math.max(weekBest[q.id] || 0, v);
+        if (v >= q.goal) { xp += q.xp; questsDone++; }
+      });
+    });
+    var ws0 = weekStart(today);
+    var quests = cfg.weekly.map(function (q) { var v = questValue(q, days, ws0); return { id: q.id, label: q.label, goal: q.goal, xp: q.xp, v: Math.min(v, q.goal), done: v >= q.goal }; });
+    var st = streaks(days, today), lvl = levelOf(game, xp), done = doneSet(cfg, days[today]);
+    var allDay = keys.some(function (k) { var ds = doneSet(cfg, days[k]); return cfg.habits.every(function (h) { return ds[h.id]; }); });
+    var bpGood = false;
+    keys.forEach(function (k) { var a = bpAvgWindow(entries, k, 7); if (a && a.n >= 5 && a.sbp < 130 && a.dbp < 80) bpGood = true; });
+    var hid = cfg.habits.map(function (h) { return h.id; });
+    var B = [
+      ['first', 'Bước đầu tiên', 'Lần ghi nhận đầu tiên', keys.length > 0, 'star'],
+      ['streak7', 'Một tuần bền bỉ', 'Chuỗi 7 ngày liên tục', st.best >= 7, 'flame'],
+      ['allday', 'Ngày trọn vẹn', 'Làm đủ mọi việc trong một ngày', allDay, 'check'],
+      ['walker', 'Đôi chân chăm chỉ', 'Đi bộ 5 ngày trong một tuần', (weekBest.q_walk || 0) >= 5, 'walk'],
+      ['bpweek', 'Tuần đo đều', 'Hoàn thành nhiệm vụ đo huyết áp một tuần', !!cfg.weekly.filter(function (q) { return q.id === 'q_bp' && (weekBest.q_bp || 0) >= q.goal; }).length, 'cuff'],
+      ['bpgood', 'Huyết áp đẹp', 'Trung bình 7 ngày dưới 130/80, từ 5 lần đo', bpGood, 'heart'],
+      ['streak30', 'Một tháng kiên trì', 'Chuỗi 30 ngày liên tục', st.best >= 30, 'trophy'],
+      ['level5', 'Lên cấp 5', 'Đạt cấp 5: Bền bỉ', lvl.lv >= 5, 'medal'],
+    ];
+    if (hid.indexOf('water') >= 0) B.splice(4, 0, ['water', 'Thận vui', 'Uống đủ nước 5 ngày trong một tuần', weekMax(days, 'water') >= 5, 'glass']);
+    if (hid.indexOf('noalc') >= 0) B.splice(5, 0, ['noalc', 'Tuần thanh đạm', '5 ngày không bia rượu trong một tuần', weekMax(days, 'noalc') >= 5, 'nobeer']);
+    if (hid.indexOf('calcium') >= 0) B.splice(4, 0, ['calcium', 'Xương chắc', 'Đủ calci 5 ngày trong một tuần', weekMax(days, 'calcium') >= 5, 'bone']);
+    if (hid.indexOf('balance') >= 0) B.splice(5, 0, ['balance', 'Dáng vững', 'Tập thăng bằng 3 ngày trong một tuần', weekMax(days, 'balance') >= 3, 'balance']);
+    var badges = B.map(function (b) { return { id: b[0], name: b[1], how: b[2], got: !!b[3], icon: b[4] }; });
+    return { today: today, days: days, xp: xp, xpToday: xpToday, level: lvl, streak: st, done: done, quests: quests, questsDone: questsDone, badges: badges,
+             doneCount: cfg.habits.filter(function (h) { return done[h.id]; }).length, total: cfg.habits.length, bp7: bpAvgWindow(entries, today, 7) };
+  }
+  function weekMax(days, hidv) {
+    var weeks = {}; Object.keys(days).forEach(function (k) { if (days[k].habits[hidv]) { var w = weekStart(k); weeks[w] = (weeks[w] || 0) + 1; } });
+    var m = 0; Object.keys(weeks).forEach(function (w) { m = Math.max(m, weeks[w]); }); return m;
+  }
+  return { compute: compute, dayOf: dayOf, todayVN: todayVN, addDays: addDays, weekStart: weekStart, noonISO: noonISO, hourOf: hourOf, levelOf: levelOf, byDay: byDay };
+})();
+
+/* ===================== home-entry message: build and read =====================
+   One line per entry, fields separated by " | ", ending with "#CODE". The header names the person and the time zone. */
+var ZMSG = (function () {
+  var HEAD = 'SỔ ĐO TẠI NHÀ';
+  var CTX = { doi: 'Lúc đói', sauan: 'Sau ăn 2 giờ', bat: 'Bất kỳ' };
+  var CTXR = { 'lúc đói': 'doi', 'sau ăn 2 giờ': 'sauan', 'bất kỳ': 'bat' };
+  var SLOT = { sang: 'Sáng', trua: 'Trưa', chieu: 'Chiều', toi: 'Tối' };
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function fmtLocal(iso, tzMin) { var d = new Date(Date.parse(iso) + tzMin * 60000); return pad(d.getUTCDate()) + '/' + pad(d.getUTCMonth() + 1) + '/' + d.getUTCFullYear() + ' ' + pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()); }
+  function clean(s) { return String(s == null ? '' : s).replace(/\|/g, '/').replace(/[\r\n]+/g, ' ').trim(); }
+  function tzLabel(tzMin) { var s = tzMin >= 0 ? '+' : '-', a = Math.abs(tzMin); return 'GMT' + s + Math.floor(a / 60) + (a % 60 ? ':' + pad(a % 60) : ''); }
+  function line(e, cfg, tzMin) {
+    var f = ['- ' + (e.type === 'habit' ? fmtLocal(e.t, tzMin).slice(0, 10) : fmtLocal(e.t, tzMin))];
+    if (e.type === 'bp') { f.push('Huyết áp ' + e.sbp + '/' + e.dbp); if (e.hr) f.push('Mạch ' + e.hr); if (e.arm) f.push('Tay ' + e.arm); }
+    else if (e.type === 'pain') { f.push('Đau ' + e.pain + '/10'); if (e.loc && e.loc.length) f.push('Vị trí: ' + e.loc.map(clean).join(', ')); if (e.kind) f.push('Kiểu: ' + clean(e.kind)); }
+    else if (e.type === 'weight') { var p = []; if (e.weight != null) p.push('Cân nặng ' + e.weight + ' kg'); if (e.waist != null) p.push('Vòng eo ' + e.waist + ' cm'); f.push(p.join(' | ')); }
+    else if (e.type === 'glucose') { f.push('Đường huyết ' + e.glu + ' mmol/L'); if (e.ctx) f.push(CTX[e.ctx] || e.ctx); }
+    else if (e.type === 'symptom') { f.push('Triệu chứng: ' + (e.sym || []).map(clean).join(', ')); if (e.sev) f.push('Mức: ' + e.sev); if (e.temp != null) f.push('Nhiệt độ ' + e.temp); }
+    else if (e.type === 'habit') {
+      var lab = (e.done || []).map(function (h) { var x = cfg.habits.filter(function (z) { return z.id === h; })[0]; return x ? x.label : h; });
+      f.push('Thói quen: ' + lab.map(clean).join('; '));
+    }
+    else if (e.type === 'meds') { f.push('Đã uống thuốc: ' + (e.slots || []).map(function (s) { return SLOT[s] || s; }).join(', ')); }
+    if (e.note) f.push('Ghi chú: ' + clean(e.note));
+    f.push('#' + e.code);
+    return f.join(' | ');
+  }
+  function build(name, entries, cfg, now) {
+    now = now || new Date();
+    var tzMin = -now.getTimezoneOffset();
+    var out = [HEAD + ' | ' + name + ' | gửi ' + fmtLocal(now.toISOString(), tzMin) + ' | ' + tzLabel(tzMin)];
+    entries.slice().sort(function (a, b) { return a.t < b.t ? -1 : 1; }).forEach(function (e) { out.push(line(e, cfg, tzMin)); });
+    return out.join('\n');
+  }
+  // ---------- reading ----------
+  var PEOPLE = [];
+  function setPeople(list) {
+    PEOPLE = (list || []).map(function (x) { var k = (x.keys || []).map(function (w) { return String(w).toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).filter(Boolean); return { pid: x.pid, re: k.length ? new RegExp(k.join('|')) : null }; });
+  }
+  function personOf(s) { s = String(s || '').toLowerCase(); for (var i = 0; i < PEOPLE.length; i++) if (PEOPLE[i].re && PEOPLE[i].re.test(s)) return PEOPLE[i].pid; return null; }
+  function numv(s) { var n = Number(String(s).replace(',', '.')); return isFinite(n) ? n : null; }
+  function parseWhen(s, tzMin) {
+    var m = s.match(/(?:^|[^\d\/])(\d{1,2})\/(\d{1,2})(?:\/(\d{4}|\d{2}(?!\d)))?(?:\s+(\d{1,2})[:hg](\d{2})?)?/);
+    if (!m || +m[1] < 1 || +m[1] > 31 || +m[2] < 1 || +m[2] > 12) return null;
+    if (m[4] != null && +m[4] > 23) return null;
+    var y = m[3] ? (m[3].length === 2 ? 2000 + Number(m[3]) : Number(m[3])) : new Date().getFullYear();
+    var hh = m[4] != null ? Number(m[4]) : 12, mm = m[5] != null ? Number(m[5]) : 0;
+    var utc = Date.UTC(y, Number(m[2]) - 1, Number(m[1]), hh, mm) - tzMin * 60000;
+    return { iso: new Date(utc).toISOString(), hasTime: m[4] != null, day: y + '-' + pad(Number(m[2])) + '-' + pad(Number(m[1])) };
+  }
+  // habit labels may hold commas ("Ăn nhạt, bớt đồ ngọt"), so known labels are matched in the text, longest first
+  function habitIds(text, cfg) {
+    var orig = String(text || ''), low = orig.toLowerCase(), out = [];
+    if (low.length !== orig.length) low = orig;
+    (cfg ? cfg.habits : []).slice().sort(function (a, b) { return b.label.length - a.label.length; }).forEach(function (h) {
+      var k = h.label.toLowerCase(), i = low.indexOf(k);
+      if (i < 0) return;
+      out.push(h.id);
+      low = low.slice(0, i) + ';' + low.slice(i + k.length); orig = orig.slice(0, i) + ';' + orig.slice(i + k.length);
+    });
+    var unknown = orig.split(/\s*[;,]\s*/).map(function (x) { return x.trim(); }).filter(Boolean);
+    return { ids: out, unknown: unknown };
+  }
+  // structured lines written by the home-entry page
+  function parseStructured(text, cfgOf, defaultPid) {
+    var pid = defaultPid || null, tz = 420, res = [], rest = [];
+    text.split(/\r?\n/).forEach(function (raw) {
+      var l = raw.trim(); if (!l) return;
+      if (l.toUpperCase().indexOf(HEAD) >= 0) {
+        var p = personOf(l); if (p) pid = p;
+        var t = l.match(/GMT\s*([+-])(\d{1,2})(?::(\d{2}))?/i); if (t) tz = (t[1] === '-' ? -1 : 1) * (Number(t[2]) * 60 + Number(t[3] || 0));
+        return;
+      }
+      var code = (l.match(/#([A-Z0-9]{4,12})\s*$/) || [])[1];
+      if (!code || !/^[-•*]?\s*\d{1,2}\/\d{1,2}/.test(l)) { rest.push(raw); return; }
+      var f = l.replace(/^[-•*]\s*/, '').split(/\s*\|\s*/), w = parseWhen(f[0], tz), cfg = cfgOf(pid);
+      if (!w) { rest.push(raw); return; }
+      var e = { person: pid, code: code, t: w.iso }, body = f.slice(1, -1), note = [];
+      body.forEach(function (x) {
+        var m;
+        if ((m = x.match(/^Huyết áp\s+(\d{2,3})\s*\/\s*(\d{2,3})/i))) { e.type = 'bp'; e.sbp = +m[1]; e.dbp = +m[2]; }
+        else if ((m = x.match(/^Mạch\s+(\d{2,3})/i))) e.hr = +m[1];
+        else if ((m = x.match(/^Tay\s+(trái|phải)/i))) e.arm = m[1].toLowerCase();
+        else if ((m = x.match(/^Đau\s+(\d{1,2})\s*\/\s*10/i))) { e.type = 'pain'; e.pain = +m[1]; }
+        else if ((m = x.match(/^Vị trí:\s*(.+)$/i))) e.loc = m[1].split(/\s*,\s*/);
+        else if ((m = x.match(/^Kiểu:\s*(.+)$/i))) e.kind = m[1];
+        else if ((m = x.match(/^Cân nặng\s+([\d.,]+)/i))) { e.type = 'weight'; e.weight = numv(m[1]); }
+        else if ((m = x.match(/^Vòng eo\s+([\d.,]+)/i))) { e.type = 'weight'; e.waist = numv(m[1]); }
+        else if ((m = x.match(/^Đường huyết\s+([\d.,]+)/i))) { e.type = 'glucose'; e.glu = numv(m[1]); }
+        else if (CTXR[x.toLowerCase()]) e.ctx = CTXR[x.toLowerCase()];
+        else if ((m = x.match(/^Triệu chứng:\s*(.*)$/i))) { e.type = 'symptom'; e.sym = m[1] ? m[1].split(/\s*,\s*/) : []; }
+        else if ((m = x.match(/^Mức:\s*(.+)$/i))) e.sev = m[1];
+        else if ((m = x.match(/^Nhiệt độ\s+([\d.,]+)/i))) e.temp = numv(m[1]);
+        else if ((m = x.match(/^Thói quen:\s*(.*)$/i))) {
+          e.type = 'habit'; e.day = w.day; var hi = habitIds(m[1], cfg); e.done = hi.ids; if (hi.unknown.length) note.push('Thói quen khác: ' + hi.unknown.join(', '));
+        }
+        else if ((m = x.match(/^Đã uống thuốc:\s*(.*)$/i))) { e.type = 'meds'; e.taken = m[1].split(/\s*,\s*/).map(function (s) { return 'Buổi ' + s.toLowerCase(); }); }
+        else if ((m = x.match(/^Ghi chú:\s*(.+)$/i))) note.push(m[1]);
+        else note.push(x);
+      });
+      if (note.length) e.note = note.join('; ');
+      if (!e.type) { rest.push(raw); return; }
+      res.push(e);
+    });
+    return { entries: res, rest: rest, person: pid };
+  }
+  // typed messages without structure: blood pressure, pulse, pain, weight, glucose
+  function parseLoose(lines, defaultPid, whenISO) {
+    var out = [];
+    lines.forEach(function (raw) {
+      var l = raw.trim(); if (!l) return;
+      var w = parseWhen(l, 420), t = w ? w.iso : whenISO, pid = personOf(l) || defaultPid, m;
+      if ((m = l.match(/(?:^|[^\d])(\d{2,3})\s*\/\s*(\d{2,3})(?![\d\/])/)) && +m[1] >= 70 && +m[1] <= 260 && +m[2] >= 35 && +m[2] < +m[1]) {
+        var e = { person: pid, type: 'bp', t: t, sbp: +m[1], dbp: +m[2], loose: true };
+        var h = l.match(/(?:mạch|nhịp|m|pulse|hr)\s*[:=]?\s*(\d{2,3})/i); if (h) e.hr = +h[1];
+        if (/tay\s*phải/i.test(l)) e.arm = 'phải'; else if (/tay\s*trái/i.test(l)) e.arm = 'trái';
+        out.push(e);
+      }
+      if ((m = l.match(/đau[^\d]{0,20}(\d{1,2})\s*(?:\/\s*10|điểm)?/i)) && +m[1] <= 10) out.push({ person: pid, type: 'pain', t: t, pain: +m[1], loose: true, note: l.slice(0, 120) });
+      if ((m = l.match(/(?:cân|nặng)[^\d]{0,12}([\d]{2,3}(?:[.,]\d)?)\s*(?:kg|ký|kí)?/i))) out.push({ person: pid, type: 'weight', t: t, weight: numv(m[1]), loose: true });
+      if ((m = l.match(/(?:đường huyết|đường máu|glucose|ĐH)[^\d]{0,10}([\d]{1,3}(?:[.,]\d)?)\s*(mg|mmol)?/i))) {
+        var g = numv(m[1]); if (g != null) { if ((m[2] && /mg/i.test(m[2])) || g > 35) g = Math.round(g / 18.016 * 10) / 10; out.push({ person: pid, type: 'glucose', t: t, glu: g, ctx: /đói/i.test(l) ? 'doi' : /sau ăn/i.test(l) ? 'sauan' : 'bat', loose: true }); }
+      }
+    });
+    return out;
+  }
+  return { build: build, parseStructured: parseStructured, parseLoose: parseLoose, personOf: personOf, setPeople: setPeople, HEAD: HEAD };
+})();
+
+/* ===================== daily habits: page builder shared by the dashboard tab and the home-entry page =====================
+   Needs esc() and ic() from the host page. Builds HTML only; the host wires the buttons:
+   [data-habit] toggles a habit for today, [data-go-entry] opens an entry form. */
+var DV_WD = ['Chủ nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+function dvDate(d) { if (!d) return ''; var p = String(d).split('-'); return p.length === 3 ? p[2] + '/' + p[1] + '/' + p[0] : p.length === 2 ? p[1] + '/' + p[0] : d; }
+function dvLongDate(day) { var d = new Date(day + 'T00:00:00Z'); return DV_WD[d.getUTCDay()] + ', ' + dvDate(day); }
+function dvNum(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+function dvRing(pct, big, small, aria) {
+  var r = 46, c = 2 * Math.PI * r, off = c * (1 - Math.max(0, Math.min(1, pct)));
+  return '<svg class="lv-ring" viewBox="0 0 108 108" role="img" aria-label="' + esc(aria) + '"><circle cx="54" cy="54" r="' + r + '" class="lv-track"/>' +
+    '<circle cx="54" cy="54" r="' + r + '" class="lv-fill" stroke-dasharray="' + c.toFixed(1) + '" stroke-dashoffset="' + off.toFixed(1) + '" transform="rotate(-90 54 54)"/>' +
+    '<text x="54" y="47" text-anchor="middle" class="lv-cap">CẤP</text><text x="54" y="77" text-anchor="middle" class="lv-num">' + esc(big) + '</text></svg>';
+}
+function dvBar(pct, cls) { return '<span class="dv-bar' + (cls ? ' ' + cls : '') + '"><i style="width:' + Math.round(Math.max(0, Math.min(1, pct)) * 100) + '%"></i></span>'; }
+/* o = {cfg, st, name, motto, privateView, canTick, focus:[{title, goal, tip, statusHTML, chip}], agenda:[{label, when, st, text}], note} */
+function dailyHTML(o) {
+  var cfg = o.cfg, st = o.st, L = st.level, got = st.badges.filter(function (b) { return b.got; }).length;
+  var h = '<section class="dl-hero"><div class="dl-hello">' +
+    '<p class="dl-date">' + esc(dvLongDate(st.today)) + '</p>' +
+    '<h2>Chào ' + esc(o.name.charAt(0).toLowerCase() + o.name.slice(1)) + '</h2>' +
+    '<p class="dl-motto">' + esc(o.motto || '') + '</p>' +
+    '<div class="dl-stats">' +
+    '<span class="dl-stat">' + ic('flame') + '<span><b>' + st.streak.cur + '</b> ngày liên tục</span></span>' +
+    '<span class="dl-stat">' + ic('star') + '<span>Hôm nay <b>+' + st.xpToday + '</b> điểm</span></span>' +
+    '<span class="dl-stat">' + ic('medal') + '<span><b>' + got + '</b>/' + st.badges.length + ' huy hiệu</span></span>' +
+    '</div></div>' +
+    '<div class="dl-level">' + dvRing(L.pct, String(L.lv), L.name, 'Cấp ' + L.lv + ', ' + L.name) +
+    '<div class="dl-lvtext"><b>' + esc(L.name) + '</b><span class="dl-xp">' + dvNum(st.xp) + ' điểm</span>' + dvBar(L.pct, 'sun') +
+    '<small>' + (L.next ? 'Còn ' + dvNum(L.toNext) + ' điểm để lên cấp ' + (L.lv + 1) : 'Đã đạt cấp cao nhất') + '</small></div></div></section>';
+  if (o.note) h += '<div class="note small">' + o.note + '</div>';
+  // today
+  h += '<section class="card dl-today"><div class="card-head"><h3>' + ic('todo') + 'Việc hôm nay</h3><div class="dl-prog"><span><b>' + st.doneCount + '</b>/' + st.total + ' việc</span>' + dvBar(st.total ? st.doneCount / st.total : 0) + '</div></div><ul class="habits">';
+  cfg.habits.forEach(function (hb) {
+    var on = !!st.done[hb.id];
+    var inner = '<span class="hb-check" aria-hidden="true">' + ic(on ? 'check' : 'plus') + '</span><span class="hb-ic">' + ic(hb.icon) + '</span><span class="hb-txt"><b>' + esc(hb.label) + '</b><small>' + esc(hb.hint) + '</small></span><span class="hb-xp">+' + hb.xp + '</span>';
+    if (hb.auto) h += '<li><button type="button" class="habit auto' + (on ? ' done' : '') + '" data-go-entry="bp" aria-label="' + esc(hb.label + (on ? ', đã làm' : ', bấm để nhập số đo')) + '">' + inner + '</button></li>';
+    else if (o.canTick) h += '<li><button type="button" class="habit' + (on ? ' done' : '') + '" data-habit="' + hb.id + '" aria-pressed="' + on + '">' + inner + '</button></li>';
+    else if (o.goTab) h += '<li><button type="button" class="habit' + (on ? ' done' : '') + '" data-go-tab="' + o.goTab + '" aria-label="' + esc(hb.label + (on ? ', đã làm' : ', bấm để mở Sổ đo và đánh dấu')) + '">' + inner + '</button></li>';
+    else h += '<li><div class="habit' + (on ? ' done' : '') + '">' + inner + '</div></li>';
+  });
+  h += '</ul><p class="small muted">' + (o.hint || 'Bấm vào từng việc khi đã làm xong; bấm lại để bỏ đánh dấu. Đo huyết áp thì bấm để mở trang nhập số đo.') + '</p></section>';
+  // quests + badges
+  h += '<div class="grid g2"><section class="card"><div class="card-head"><h3>' + ic('flag') + 'Nhiệm vụ tuần này</h3><span class="small muted">Tuần từ thứ Hai</span></div><div class="quests">' +
+    st.quests.map(function (q) {
+      return '<div class="quest' + (q.done ? ' done' : '') + '"><div class="q-top"><b>' + esc(q.label) + '</b><span class="q-xp">' + (q.done ? ic('check', 'sm') + 'Xong' : '+' + q.xp + ' điểm') + '</span></div>' + dvBar(q.goal ? q.v / q.goal : 0, q.done ? 'good' : '') + '<small>' + q.v + '/' + q.goal + '</small></div>';
+    }).join('') + '</div></section>';
+  h += '<section class="card"><div class="card-head"><h3>' + ic('medal') + 'Huy hiệu</h3><span class="small muted">' + got + ' đã nhận</span></div><div class="badges">' +
+    st.badges.map(function (b) { return '<div class="badge' + (b.got ? ' got' : '') + '" title="' + esc(b.how) + '"><span class="b-medal">' + ic(b.got ? b.icon : 'lock') + '</span><b>' + esc(b.name) + '</b><small>' + esc(b.how) + '</small></div>'; }).join('') +
+    '</div></section></div>';
+  // focus
+  h += '<section class="stack"><div class="sec-head"><h3>' + ic('target') + 'Điểm còn tồn tại</h3><p>Những chỉ số cải thiện được bằng thói quen hằng ngày</p></div><div class="focus">' +
+    o.focus.map(function (f) {
+      return '<div class="card fc"><div class="fc-top"><b>' + esc(f.title) + '</b>' + (f.chip || '') + '</div><div class="fc-goal">' + ic('target', 'sm') + '<span>Mục tiêu: ' + esc(f.goal) + '</span></div>' + (f.statusHTML || '') + '<div class="fc-tip">' + ic('leaf', 'sm') + '<span>' + esc(f.tip) + '</span></div></div>';
+    }).join('') + '</div></section>';
+  // remember + agenda
+  h += '<div class="grid g2"><section class="card"><div class="card-head"><h3>' + ic('info') + 'Cần lưu ý</h3></div><ul class="remember">' +
+    (cfg.remember || []).map(function (r) { return '<li>' + esc(r) + '</li>'; }).join('') + '</ul></section>';
+  h += '<section class="card"><div class="card-head"><h3>' + ic('calendar') + 'Lịch sắp tới</h3></div><div class="dl-agenda">' +
+    (o.agenda.length ? o.agenda.map(function (a) {
+      var parts = String(a.when || '').split('-'), box;
+      if (parts.length >= 2 && String(a.when) >= String(st.today).slice(0, a.when.length)) box = '<span class="dbox"><small>Th' + Number(parts[1]) + '</small><b>' + (parts.length === 3 ? Number(parts[2]) : '') + '</b><small>' + parts[0] + '</small></span>';
+      else box = '<span class="dbox todo">' + ic('todo') + '</span>';
+      return '<div class="ag-row">' + box + '<div><b>' + esc(a.label) + '</b><small>' + esc(a.text || '') + '</small></div></div>';
+    }).join('') : '<p class="muted small">Chưa có lịch.</p>') + '</div></section></div>';
+  h += '<section class="dl-sos">' + ic('phone', 'lg') + '<div><b>Gọi cấp cứu 115 ngay khi:</b> đau ngực, khó thở, yếu hoặc liệt nửa người, nói khó, méo miệng, ngất. Các trường hợp khác cần hỏi ý kiến, gọi ' + esc(o.doctorShort || 'bác sĩ') + '.</div></section>';
+  return h;
+}
+/* agenda wording without alarming words: past dates read as "Nên làm sớm" */
+function dvAgendaText(kind, when, freq, today) {
+  if (kind === 'todo') return 'Cần làm';
+  if (kind === 'planned') return 'Đã lên lịch, tháng ' + dvDate(when);
+  if (!when) return freq || '';
+  if (when < today) return 'Nên làm sớm';
+  return 'Khoảng ' + dvDate(when.length === 10 ? when.slice(0, 7) : when) + (freq ? ' (' + freq.toLowerCase() + ')' : '');
+}
+
+/* ===================== Kho số đo chung: phần dùng chung của trang Sổ đo và bảng theo dõi =====================
+   1. Mã truy cập riêng của từng người (24 byte ngẫu nhiên, mã hoá base64url) nằm trong phần sau dấu # của liên kết, dạng #minh.MÃ.
+      Phần sau dấu # không đi lên máy chủ trong địa chỉ. Trang lưu mã trong localStorage, mục riêng, không lẫn với số liệu.
+   2. Gộp nhật ký thao tác (tạo, sửa, xoá) lấy từ kho vào danh sách số đo của một người. Kết quả không phụ thuộc thứ tự nhận:
+        - mỗi mục có số lần sửa rev; bản rev cao hơn thắng;
+        - xoá thắng khi rev bằng nhau hoặc cao hơn; mục đã xoá được nhớ trong bảng tomb để thao tác cũ đến muộn không làm nó sống lại;
+        - cùng rev mà nội dung khác nhau (hai máy sửa cùng lúc): thói quen lấy hợp hai danh sách việc đã làm, loại khác lấy bản có chuỗi
+          chuẩn hoá lớn hơn. Mọi máy chọn giống nhau nên cuối cùng hội tụ. */
+var SODOLOG = (function () {
+  var KEY = 'so-do-tai-nha-key-v1';
+  var TOKEN_RE = /^[A-Za-z0-9_-]{16,64}$/;
+
+  function readKeys() {
+    try { var o = JSON.parse(window.localStorage.getItem(KEY) || '{}'); return o && typeof o === 'object' && !Array.isArray(o) ? o : {}; } catch (e) { return {}; }
+  }
+  function writeKeys(o) { try { window.localStorage.setItem(KEY, JSON.stringify(o)); return true; } catch (e) { return false; } }
+  // who: mã người (LTM, DTG) hoặc 'ADMIN'
+  function getKey(who) { var t = readKeys()[who]; return typeof t === 'string' && TOKEN_RE.test(t) ? t : ''; }
+  function setKey(who, token) {
+    if (!TOKEN_RE.test(String(token || ''))) return false;
+    var o = readKeys(); if (o[who] === token) return true;
+    o[who] = token; return writeKeys(o);
+  }
+  function dropKey(who) { var o = readKeys(); delete o[who]; writeKeys(o); }
+  // '#minh.MÃ' -> { slug: 'minh', token: 'MÃ' }; '#minh' -> { slug: 'minh', token: '' }
+  function parseHash(h) {
+    h = String(h || '').replace(/^#/, '');
+    var i = h.indexOf('.'), tok = i < 0 ? '' : h.slice(i + 1);
+    return { slug: (i < 0 ? h : h.slice(0, i)).toLowerCase(), token: TOKEN_RE.test(tok) ? tok : '' };
+  }
+
+  function clone(x) { return JSON.parse(JSON.stringify(x)); }
+  function stable(o) {
+    if (Array.isArray(o)) return '[' + o.map(stable).join(',') + ']';
+    if (o && typeof o === 'object') return '{' + Object.keys(o).sort().map(function (k) { return JSON.stringify(k) + ':' + stable(o[k]); }).join(',') + '}';
+    return JSON.stringify(o);
+  }
+  function indexOf(list, id) { for (var i = 0; i < list.length; i++) if (list[i].id === id) return i; return -1; }
+
+  /* merge(list, tomb, ops, opt): list là mảng số đo của một người (sửa tại chỗ), tomb là { id: rev đã xoá } (sửa tại chỗ),
+     ops là các thao tác từ kho, mỗi thao tác { op, rev, dev, e }. opt.dev là mã máy này.
+     opt.mine (tuỳ chọn, sửa tại chỗ) là { id: rev } các bản do chính máy này vừa lưu mà kho chưa trả về; khi thao tác của chính máy này
+     trở về cùng rev và bản trong danh sách vẫn là bản tự lưu, thì lấy bản kho đã làm sạch. Nếu bản đó đã bị bản của máy khác thay thế
+     thì thao tác của chính máy này đi qua cùng quy tắc với mọi thao tác khác, để mọi máy chọn giống nhau.
+     Trả về { added, replaced, removed: [id], seen: { id: rev cao nhất kho đang giữ cho mục này (không tính xoá) } }. */
+  function merge(list, tomb, ops, opt) {
+    var me = (opt && opt.dev) || '', mine = (opt && opt.mine) || {}, out = { added: [], replaced: [], removed: [], seen: {} };
+    (ops || []).forEach(function (o) {
+      var e = o && o.e; if (!e || !e.id) return;
+      var id = e.id, rev = o.rev | 0; if (rev < 1) return;
+      var i = indexOf(list, id), cur = i >= 0 ? list[i] : null, crev = cur ? (cur.rev || 1) : 0;
+      if (o.op === 'delete') {
+        if (tomb[id] == null || rev > tomb[id]) tomb[id] = rev;
+        delete mine[id];
+        if (cur && rev >= crev) { list.splice(i, 1); out.removed.push(id); delete out.seen[id]; }
+        return;
+      }
+      if (tomb[id] != null && rev <= tomb[id]) return;   // đã bị xoá với rev này hoặc cao hơn
+      if (!out.seen[id] || rev > out.seen[id]) out.seen[id] = rev;
+      var ne = clone(e); ne.rev = rev;
+      if (!cur) { list.push(ne); out.added.push(id); delete mine[id]; return; }
+      if (rev > crev) { list[i] = ne; out.replaced.push(id); if (mine[id] != null && mine[id] <= rev) delete mine[id]; return; }
+      if (rev < crev) return;
+      // cùng rev
+      if (stable(ne) === stable(cur)) { if (mine[id] === rev) delete mine[id]; return; }
+      if (cur.type === 'habit') {   // hai máy tick việc khác nhau cùng lúc: lấy hợp, kể cả bản của chính máy này
+        var s = {}, u = [];
+        (cur.done || []).concat(ne.done || []).forEach(function (x) { if (!s[x]) { s[x] = 1; u.push(x); } });
+        u.sort(); ne.done = u;
+        if (mine[id] === rev) delete mine[id];
+        if (stable(ne) !== stable(cur)) { list[i] = ne; out.replaced.push(id); }
+        return;
+      }
+      if (o.dev && o.dev === me && mine[id] === rev) { list[i] = ne; out.replaced.push(id); delete mine[id]; return; }   // bản máy chủ đã làm sạch của bản tự lưu
+      if (stable(ne) > stable(cur)) { list[i] = ne; out.replaced.push(id); if (mine[id] === rev) delete mine[id]; }
+    });
+    return out;
+  }
+  // dựng danh sách số đo từ nhật ký (bảng theo dõi dùng)
+  function fold(ops, opt) { var list = [], tomb = {}; merge(list, tomb, ops, opt); return { entries: list, tomb: tomb }; }
+
+  return { KEY: KEY, TOKEN_RE: TOKEN_RE, getKey: getKey, setKey: setKey, dropKey: dropKey, parseHash: parseHash, merge: merge, fold: fold, stable: stable };
+})();
+
+/* ===================== Sổ đo tại nhà: gửi số đo về hệ thống =====================
+   Hai đường độc lập, mỗi đường có hàng chờ riêng trên điện thoại:
+   1. Netlify Forms (bản lưu dự phòng, có từ v4): POST dạng urlencoded về đúng địa chỉ trang, kèm form-name. Mất mạng thì giữ lại,
+      có mạng gửi tiếp. Tên trường và giá trị bằng tiếng Anh để tệp CSV đọc được ngay; ghi chú giữ nguyên chữ người dùng gõ.
+      Mỗi bản gửi mang op_id riêng: gửi lặp do mạng chập chờn thì bộ gom CSV bỏ bản trùng.
+   2. Kho chung /api/so-do (từ v5): khi trang có mã riêng của người dùng (liên kết dạng #minh.MÃ), mỗi thao tác cũng gửi vào kho,
+      và trang nhận về thao tác của các máy khác cùng người để mọi máy thấy cùng một lịch sử. Gộp theo entry_id và rev (sodo_shared.js).
+      Không có mã thì trang chạy như v4. */
+var SYNC = (function () {
+  // thứ tự trường của form ẩn; assemble_entry.py đọc mảng này để dựng form cho Netlify nhận diện
+  var FIELDS = ['summary', 'person', 'op', 'type', 'measured_at', 'sbp', 'dbp', 'pulse', 'arm', 'pain_score', 'pain_sites', 'pain_type',
+    'weight_kg', 'waist_cm', 'glucose_mmol_l', 'glucose_context', 'symptoms', 'severity', 'temp_c', 'habit_day', 'habits_done', 'note',
+    'entry_id', 'rev', 'op_id', 'device_id', 'saved_at', 'tz', 'app_version'];
+  var ARM = { 'trái': 'left', 'phải': 'right' };
+  var LOC = { 'Đầu': 'head', 'Cổ': 'neck', 'Vai': 'shoulder', 'Tay': 'arm', 'Ngực': 'chest', 'Bụng': 'abdomen', 'Lưng': 'back', 'Thắt lưng': 'lower_back',
+    'Hông': 'hip', 'Gối': 'knee', 'Cổ chân': 'ankle', 'Bàn chân': 'foot' };
+  var PK = { 'Âm ỉ': 'dull', 'Nhói': 'sharp', 'Rát': 'burning', 'Tê bì': 'numbness', 'Lan xuống tay': 'radiates_to_arm', 'Lan xuống chân': 'radiates_to_leg',
+    'Cứng khớp buổi sáng': 'morning_stiffness', 'Đau khi đi lại': 'pain_on_walking' };
+  var SYM = { 'Sốt': 'fever', 'Ho': 'cough', 'Khó thở': 'shortness_of_breath', 'Đau ngực': 'chest_pain', 'Hồi hộp': 'palpitations', 'Chóng mặt': 'dizziness',
+    'Đau đầu': 'headache', 'Mệt nhiều': 'marked_fatigue', 'Buồn nôn': 'nausea', 'Tiêu chảy': 'diarrhea', 'Táo bón': 'constipation', 'Tiểu buốt': 'painful_urination',
+    'Tiểu ra máu': 'blood_in_urine', 'Phù chân': 'leg_swelling', 'Tê yếu tay chân': 'limb_numbness_weakness', 'Mất ngủ': 'insomnia' };
+  var SEV = { 'Nhẹ': 'mild', 'Vừa': 'moderate', 'Nặng': 'severe' };
+  var CTX = { doi: 'fasting', sauan: 'post_meal_2h', bat: 'random' };
+  var STEPS = [15, 60, 300, 900, 1800];          // giây chờ trước mỗi lần thử lại, lần sau lâu hơn lần trước
+  var ID = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  // dấu nhận diện: trang Sổ đo và trang Đã nhận; ghép lúc chạy để mã nguồn trang không chứa nguyên chuỗi
+  var PAGE_MARK = 'name="sdtn-' + 'page"', ACK_MARK = 'name="sdtn-' + 'ack"';
+  var CFG = null, S = null, hooks = { save: function () {}, changed: function () {}, people: function () { return {}; } }, busy = false, timer = null, fails = 0;
+  var sBusy = false, sTimer = null, sFails = 0, pulling = false, pullQ = {}, pollTimer = null, lastPull = 0;
+  var POLL_MS = 120000, PAGES = 30, BATCH = 20;
+
+  function rid(n) {
+    var a = new Uint8Array(n), out = '';
+    try { window.crypto.getRandomValues(a); } catch (e) { for (var i = 0; i < n; i++) a[i] = Math.floor(Math.random() * 256); }
+    for (var j = 0; j < n; j++) out += ID[a[j] % 32];
+    return out;
+  }
+  function clone(x) { return JSON.parse(JSON.stringify(x)); }
+  function map(dict, v) { return dict[v] || String(v || '').trim(); }
+  function list(dict, arr) { return (arr || []).map(function (v) { return map(dict, v); }).filter(Boolean).join(';'); }
+  function num(v) { return v == null || v === '' || isNaN(v) ? '' : String(v); }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function vnTime(iso) { var d = new Date(Date.parse(iso) + 7 * 3600000); return pad(d.getUTCDate()) + '/' + pad(d.getUTCMonth() + 1) + '/' + d.getUTCFullYear() + ' ' + pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()); }
+  function zone() {
+    try { var z = Intl.DateTimeFormat().resolvedOptions().timeZone; if (z) return z; } catch (e) { /* older phones */ }
+    var m = -new Date().getTimezoneOffset(), s = m >= 0 ? '+' : '-'; m = Math.abs(m);
+    return 'UTC' + s + pad(Math.floor(m / 60)) + ':' + pad(m % 60);
+  }
+
+  /* ---------- nội dung một bản gửi ---------- */
+  function fields(op) {
+    var e = op.e, f = { person: op.pid, op: op.op, type: e.type, measured_at: e.t || '', entry_id: e.id, rev: String(op.rev), op_id: op.id,
+      device_id: S.device, saved_at: op.at, tz: op.tz || '', app_version: (CFG && CFG.app) || '' };
+    var head = op.pid + (op.op === 'create' ? '' : ' ' + op.op) + ' ' + e.type + ' ' + (e.type === 'habit' && e.day ? e.day.split('-').reverse().join('/') : vnTime(e.t));
+    var val = '';
+    if (op.op !== 'delete') {
+      if (e.type === 'bp') { f.sbp = num(e.sbp); f.dbp = num(e.dbp); f.pulse = num(e.hr); f.arm = e.arm ? map(ARM, e.arm) : ''; val = e.sbp + '/' + e.dbp + (e.hr ? ' pulse ' + e.hr : ''); }
+      else if (e.type === 'pain') { f.pain_score = num(e.pain); f.pain_sites = list(LOC, e.loc); f.pain_type = list(PK, e.kind ? String(e.kind).split(', ') : []); val = 'score ' + e.pain + (f.pain_sites ? ' ' + f.pain_sites : ''); }
+      else if (e.type === 'weight') { f.weight_kg = num(e.weight); f.waist_cm = num(e.waist); val = [e.weight != null ? e.weight + ' kg' : '', e.waist != null ? 'waist ' + e.waist + ' cm' : ''].filter(Boolean).join(' '); }
+      else if (e.type === 'glucose') { f.glucose_mmol_l = num(e.glu); f.glucose_context = e.ctx ? map(CTX, e.ctx) : ''; val = e.glu + ' mmol/L ' + f.glucose_context; }
+      else if (e.type === 'symptom') { f.symptoms = list(SYM, e.sym); f.severity = e.sev ? map(SEV, e.sev) : ''; f.temp_c = num(e.temp); val = f.symptoms + (f.temp_c ? ' ' + f.temp_c + ' C' : ''); }
+      else if (e.type === 'habit') { f.habit_day = e.day || ''; f.habits_done = (e.done || []).slice().sort().join(';'); val = f.habits_done || 'none'; }
+      if (e.note) f.note = String(e.note).slice(0, 300);
+    } else if (e.type === 'habit') f.habit_day = e.day || '';
+    f.summary = (head + (val ? ' ' + val : '')).slice(0, 160);
+    var out = { 'form-name': CFG.form, 'bot-field': '' };
+    FIELDS.forEach(function (k) { if (f[k] != null && f[k] !== '') out[k] = f[k]; });
+    return out;
+  }
+  function encode(o) { return Object.keys(o).map(function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(o[k]).replace(/%20/g, '+'); }).join('&'); }
+
+  /* ---------- hàng chờ ---------- */
+  function enabled() { return !!(CFG && CFG.form) && typeof fetch === 'function' && /^https?:$/.test(location.protocol); }
+  function init(cfg, state, h) {
+    CFG = cfg || null; S = state || {};
+    if (!S.device) S.device = 'D' + rid(8);
+    S.q = Array.isArray(S.q) ? S.q : []; S.done = S.done || {};
+    S.sq = Array.isArray(S.sq) ? S.sq : []; S.mine = S.mine || {}; S.sdone = S.sdone || {}; S.tomb = S.tomb || {}; S.cur = S.cur || {}; S.auth = S.auth || {}; S.ver = S.ver || {};
+    hooks.save = (h && h.save) || hooks.save; hooks.changed = (h && h.changed) || hooks.changed; hooks.people = (h && h.people) || hooks.people;
+    if (typeof window !== 'undefined' && window.addEventListener) {
+      window.addEventListener('online', function () { fails = 0; sFails = 0; kick(300); skick(500); pullAll(false, 800); });
+      document.addEventListener('visibilitychange', function () { if (!document.hidden) { kick(600); skick(900); pullAll(false, 1200); } });
+      pollTimer = setInterval(function () { if (!document.hidden) pullAll(true, 0); }, POLL_MS);
+    }
+    return S;
+  }
+  function state() { return S; }
+  function sameEntry(o, pid, id) { return o.pid === pid && o.e && o.e.id === id; }
+  // xếp một bản gửi; bản chưa thử gửi lần nào của cùng mục thì gộp làm một
+  // kind: 'save' (tự chọn create hay update), 'create', 'update', 'delete'
+  function put(pid, e, kind, delay) {
+    if (!S) return;
+    if (kind === 'delete') { var tb = S.tomb[pid] || (S.tomb[pid] = {}); if (tb[e.id] == null || tb[e.id] < (e.rev || 1)) tb[e.id] = e.rev || 1; }
+    sput(pid, e, kind, delay);
+    var snap = clone(e), rev = e.rev || 1, done = (S.done[pid] || {})[e.id];
+    if (kind === 'save') kind = done == null ? 'create' : 'update';
+    for (var i = S.q.length - 1; i >= 0; i--) {
+      var o = S.q[i];
+      if (!sameEntry(o, pid, e.id) || o.tries) continue;
+      if (kind === 'delete' && o.op === 'create') { S.q.splice(i, 1); if (done == null) { hooks.save(); return; } }
+      else { o.op = o.op === 'create' && kind !== 'delete' ? 'create' : kind; o.e = snap; o.rev = rev; o.at = new Date().toISOString(); o.tz = zone(); o.id = 'Q' + rid(10); hooks.save(); kick(delay); return; }
+      break;
+    }
+    S.q.push({ id: 'Q' + rid(10), pid: pid, op: kind, e: snap, rev: rev, at: new Date().toISOString(), tz: zone(), tries: 0 });
+    hooks.save(); kick(delay);
+  }
+  // mục nào chưa có bản gửi được nhận thì xếp lại, phòng trường hợp trang đóng giữa chừng
+  function reconcile(people) {
+    if (!S) return;
+    Object.keys(people || {}).forEach(function (pid) {
+      (people[pid].entries || []).forEach(function (e) {
+        if (e.type === 'habit' && !(e.done || []).length && (S.done[pid] || {})[e.id] == null) return;
+        var got = (S.done[pid] || {})[e.id], waiting = S.q.some(function (o) { return sameEntry(o, pid, e.id); });
+        if (!waiting && got !== (e.rev || 1)) put(pid, e, got == null ? 'create' : 'update', 1500);
+      });
+    });
+  }
+  function pendingFor(pid) { return S ? S.q.filter(function (o) { return !pid || o.pid === pid; }) : []; }
+  // số mục còn chờ ở một trong hai đường, mỗi mục chỉ đếm một lần
+  function pendingCount(pid) {
+    var ids = {};
+    pendingFor(pid).forEach(function (o) { ids[o.pid + '/' + o.e.id] = 1; });
+    if (S) S.sq.forEach(function (o) { if ((!pid || o.pid === pid) && hasToken(o.pid)) ids[o.pid + '/' + o.e.id] = 1; });
+    return Object.keys(ids).length;
+  }
+  function isSynced(pid, e) {
+    if (!S) return false;
+    var rev = e.rev || 1, forms = (S.done[pid] || {})[e.id] === rev && !S.q.some(function (o) { return sameEntry(o, pid, e.id); });
+    if (!hasToken(pid)) return forms;
+    return forms && (S.sdone[pid] || {})[e.id] === rev && !S.sq.some(function (o) { return sameEntry(o, pid, e.id); });
+  }
+
+  /* ---------- gửi ---------- */
+  function post(op) {
+    var ctl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var to = setTimeout(function () { if (ctl) ctl.abort(); }, 25000);
+    return fetch(CFG.post || '/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: encode(fields(op)),
+      cache: 'no-store', credentials: 'same-origin', redirect: 'follow', signal: ctl ? ctl.signal : undefined })
+      .then(function (r) {
+        clearTimeout(to);
+        if (!r.ok) return { ok: false, why: 'http_' + r.status };
+        return r.text().then(function (t) {
+          // trả về đúng trang Sổ đo nghĩa là máy chủ chưa nhận form; trang Đã nhận hoặc trang cảm ơn của Netlify là đã nhận
+          if (t.indexOf(ACK_MARK) >= 0 || t.indexOf(PAGE_MARK) < 0) return { ok: true };
+          return { ok: false, why: 'not_received' };
+        });
+      }, function () { clearTimeout(to); return { ok: false, why: 'network' }; });
+  }
+  function kick(ms) { clearTimeout(timer); timer = setTimeout(run, ms == null ? 0 : ms); }
+  function run() {
+    if (busy || !S || !S.q.length || !enabled()) return;
+    if (navigator.onLine === false) { S.err = 'offline'; hooks.changed(); return; }   // chờ sự kiện online
+    busy = true;
+    var op = S.q[0]; op.tries = (op.tries || 0) + 1; hooks.save();
+    post(op).then(function (res) {
+      busy = false;
+      if (res.ok) {
+        var i = S.q.indexOf(op); if (i >= 0) S.q.splice(i, 1);
+        var d = S.done[op.pid] || (S.done[op.pid] = {});
+        if (op.op === 'delete') delete d[op.e.id]; else d[op.e.id] = op.rev;
+        S.ok_at = new Date().toISOString(); S.err = ''; fails = 0;
+        hooks.save(); hooks.changed();
+        if (S.q.length) kick(250);
+      } else {
+        S.err = res.why; S.err_at = new Date().toISOString();
+        hooks.save(); hooks.changed();
+        kick(STEPS[Math.min(fails, STEPS.length - 1)] * 1000); fails++;
+      }
+    });
+  }
+  function retry() { fails = 0; sFails = 0; kick(0); skick(0); pullAll(false, 200); }
+  function status(pid) {
+    return { n: pendingCount(pid), total: pendingCount(), ok_at: S && S.ok_at || '', err: S && (S.err || (hasToken(pid) ? S.serr : '')) || '', busy: busy || sBusy,
+      offline: typeof navigator !== 'undefined' && navigator.onLine === false, on: enabled() || storeOn() };
+  }
+
+  /* ---------- kho chung: gửi và nhận qua /api/so-do bằng mã riêng trong liên kết ---------- */
+  function storeOn() { return !!(CFG && CFG.store) && typeof fetch === 'function' && /^https?:$/.test(location.protocol); }
+  function token(pid) { try { return SODOLOG.getKey(pid); } catch (e) { return ''; } }
+  function hasToken(pid) { return !!(storeOn() && S && token(pid) && S.auth[pid] !== 'bad'); }
+  // Mã quyết định máy chủ ghi vào sổ của ai. Trang chỉ gửi lên sau khi một lần nhận về cho thấy máy chủ nhận mã này là đúng người của trang:
+  // liên kết #minh.MÃ_CỦA_DÌ không được làm số đo của chú chảy sang sổ của dì. Dấu vân tay chỉ để so sánh, không dùng lại được làm mã.
+  function fp(t) { var h = 5381; for (var i = 0; i < t.length; i++) h = ((h * 33) ^ t.charCodeAt(i)) >>> 0; return h.toString(16); }
+  function verified(pid) { return !!S && S.ver[pid] === fp(token(pid)); }
+  function setToken(pid, tok) {
+    if (!S || !SODOLOG.setKey(pid, tok)) return false;
+    delete S.auth[pid]; S.serr = ''; sFails = 0; hooks.save();
+    pullAll(false, 0); skick(300);
+    return true;
+  }
+  function api(pid, method, qs, body) {
+    var ctl = typeof AbortController !== 'undefined' ? new AbortController() : null, to = setTimeout(function () { if (ctl) ctl.abort(); }, 25000);
+    var h = { Authorization: 'Bearer ' + token(pid) }; if (body) h['Content-Type'] = 'application/json';
+    return fetch(CFG.store + (qs || ''), { method: method, headers: h, body: body ? JSON.stringify(body) : undefined, cache: 'no-store', credentials: 'omit', signal: ctl ? ctl.signal : undefined })
+      .then(function (r) { clearTimeout(to); return r.json().then(function (j) { return { status: r.status, j: j }; }, function () { return { status: r.status, j: null }; }); },
+            function () { clearTimeout(to); return { status: 0, j: null }; });
+  }
+  function wire(o) { return { id: o.id, op: o.op, rev: o.rev, at: o.at, dev: S.device, e: o.e }; }
+  function badMap(pid) { S.bad = S.bad || {}; return S.bad[pid] || (S.bad[pid] = {}); }
+
+  // xếp một thao tác vào hàng chờ của kho; thao tác chưa thử gửi của cùng mục thì gộp làm một
+  function sput(pid, e, kind, delay) {
+    if (!S || !storeOn() || !token(pid)) return;
+    var snap = clone(e), rev = e.rev || 1, sd = S.sdone[pid] || {}, mn = S.mine[pid] || (S.mine[pid] = {});
+    kind = kind === 'delete' ? 'delete' : (sd[e.id] == null ? 'create' : 'update');
+    if (kind === 'delete') delete mn[e.id]; else mn[e.id] = rev;
+    for (var i = S.sq.length - 1; i >= 0; i--) {
+      var o = S.sq[i];
+      if (!sameEntry(o, pid, e.id) || o.tries) continue;
+      if (kind === 'delete' && o.op === 'create') { S.sq.splice(i, 1); if (sd[e.id] == null) { hooks.save(); return; } }
+      else { o.op = o.op === 'create' && kind !== 'delete' ? 'create' : kind; o.e = snap; o.rev = rev; o.at = new Date().toISOString(); o.id = 'Q' + rid(10); hooks.save(); skick(delay); return; }
+      break;
+    }
+    S.sq.push({ id: 'Q' + rid(10), pid: pid, op: kind, e: snap, rev: rev, at: new Date().toISOString(), tries: 0 });
+    hooks.save(); skick(delay);
+  }
+  // mục nào kho chưa giữ đúng bản hiện tại thì xếp gửi lên; chạy sau mỗi lần nhận thành công để không gửi lại thứ vừa nhận về
+  function sreconcile(pid) {
+    var d = hooks.people()[pid]; if (!d || !hasToken(pid)) return;
+    var sd = S.sdone[pid] || {}, bad = badMap(pid);
+    d.entries.forEach(function (e) {
+      var rev = e.rev || 1;
+      if ((sd[e.id] || 0) >= rev || bad[e.id] === rev) return;
+      if (S.sq.some(function (o) { return sameEntry(o, pid, e.id); })) return;
+      if (e.type === 'habit' && !(e.done || []).length && sd[e.id] == null) return;
+      sput(pid, e, 'save', 1500);
+    });
+  }
+  function skick(ms) { clearTimeout(sTimer); sTimer = setTimeout(srun, ms == null ? 0 : ms); }
+  function srun() {
+    if (sBusy || !S || !storeOn() || !S.sq.length) return;
+    if (typeof navigator !== 'undefined' && navigator.onLine === false) { S.serr = 'offline'; hooks.changed(); return; }
+    var first = null, unver = false;
+    for (var i = 0; i < S.sq.length; i++) if (hasToken(S.sq[i].pid)) { if (verified(S.sq[i].pid)) { first = S.sq[i]; break; } unver = true; }
+    if (!first) { if (unver) pullAll(false, 0); return; }
+    var pid = first.pid, batch = S.sq.filter(function (o) { return o.pid === pid; }).slice(0, BATCH);
+    sBusy = true; batch.forEach(function (o) { o.tries = (o.tries || 0) + 1; }); hooks.save();
+    api(pid, 'POST', '', { ops: batch.map(wire) }).then(function (res) {
+      sBusy = false;
+      var j = res.j, ok = res.status === 200 && j && j.ok, perm = res.status === 422 || res.status === 413 || res.status === 400;
+      if (ok || perm) {
+        var rej = {}; ((ok && j.rejected) || []).forEach(function (r) { if (r && r.id) rej[r.id] = 1; });
+        var sd = S.sdone[pid] || (S.sdone[pid] = {}), bad = badMap(pid), nrej = 0;
+        batch.forEach(function (o) {
+          var k = S.sq.indexOf(o); if (k >= 0) S.sq.splice(k, 1);
+          if (perm || rej[o.id]) { nrej++; bad[o.e.id] = o.rev; return; }   // kho từ chối vì giá trị không hợp lệ: không gửi lại mãi
+          if (o.op === 'delete') delete sd[o.e.id]; else if ((sd[o.e.id] || 0) <= o.rev) sd[o.e.id] = o.rev;
+        });
+        S.srej = (S.srej || 0) + nrej; S.serr = nrej ? 'rejected' : ''; S.sok_at = new Date().toISOString(); sFails = 0;
+        hooks.save(); hooks.changed();
+        if (S.sq.length) skick(250);
+      } else if (res.status === 401 || res.status === 403) {
+        S.auth[pid] = 'bad'; S.serr = 'auth'; hooks.save(); hooks.changed();
+      } else {
+        S.serr = res.status ? 'http_' + res.status : 'network'; hooks.save(); hooks.changed();
+        skick(STEPS[Math.min(sFails, STEPS.length - 1)] * 1000); sFails++;
+      }
+    });
+  }
+
+  // nhận thao tác của các máy khác về và gộp vào danh sách số đo; trả về true nếu danh sách đổi
+  function applyOps(pid, ops) {
+    var d = hooks.people()[pid]; if (!d || !ops.length) return false;
+    var tomb = S.tomb[pid] || (S.tomb[pid] = {}), sd = S.sdone[pid] || (S.sdone[pid] = {}), fd = S.done[pid] || (S.done[pid] = {});
+    var r = SODOLOG.merge(d.entries, tomb, ops, { dev: S.device, mine: S.mine[pid] || (S.mine[pid] = {}) });
+    Object.keys(r.seen).forEach(function (id) {
+      if ((sd[id] || 0) < r.seen[id]) sd[id] = r.seen[id];
+      var loc = null; d.entries.forEach(function (x) { if (x.id === id) loc = x; });
+      // mục nhận từ kho đã vào Netlify Forms từ máy gửi nó, không gửi lại lên Forms
+      if (loc && (loc.rev || 1) === r.seen[id] && (fd[id] == null || fd[id] < r.seen[id])) fd[id] = r.seen[id];
+    });
+    r.removed.forEach(function (id) { delete sd[id]; delete fd[id]; });
+    function dead(o) { return o.pid === pid && o.op !== 'delete' && tomb[o.e.id] != null && o.rev <= tomb[o.e.id]; }
+    S.q = S.q.filter(function (o) { return !dead(o); }); S.sq = S.sq.filter(function (o) { return !dead(o); });
+    return !!(r.added.length || r.replaced.length || r.removed.length);
+  }
+  function pullOne(pid) {
+    var pages = 0, last = '';
+    function page(qs) {
+      return api(pid, 'GET', '?limit=300' + qs).then(function (res) {
+        var j = res.j;
+        if (res.status === 401 || res.status === 403 || res.status === 400) { S.auth[pid] = 'bad'; S.serr = 'auth'; return { ok: false }; }
+        if (res.status !== 200 || !j || !j.ok) { S.perr = res.status ? 'http_' + res.status : 'network'; return { ok: false }; }
+        if (j.person !== pid || j.role !== 'person') { S.auth[pid] = 'bad'; S.serr = 'auth'; return { ok: false }; }   // mã của người khác
+        S.ver[pid] = fp(token(pid));
+        var ch = applyOps(pid, j.ops || []);
+        if (j.cursor) S.cur[pid] = j.cursor;
+        pages++;
+        if (j.more && pages < PAGES && j.cursor && j.cursor !== last) { last = j.cursor; return page('&after=' + encodeURIComponent(j.cursor)).then(function (r) { return { ok: r.ok, changed: ch || r.changed }; }); }
+        return { ok: true, changed: ch };
+      });
+    }
+    var cur = S.cur[pid] || '';
+    return page(cur ? '&since=' + encodeURIComponent(cur) : '');
+  }
+  // nhận cho mọi người đã có mã; quiet = chạy theo nhịp 2 phút, bỏ qua nếu vừa nhận xong
+  function pullAll(quiet, delay) {
+    if (!S || !storeOn()) return;
+    clearTimeout(pullQ.t);
+    pullQ.t = setTimeout(function () {
+      if (pulling || (typeof navigator !== 'undefined' && navigator.onLine === false)) return;
+      if (quiet && Date.now() - lastPull < 20000) return;
+      var pids = Object.keys(hooks.people()).filter(hasToken);
+      if (!pids.length) return;
+      pulling = true;
+      var changed = false, was = (S.perr || '') + '|' + (S.serr || '');
+      function finish() {
+        pulling = false; lastPull = Date.now(); hooks.save();
+        if (changed || was !== (S.perr || '') + '|' + (S.serr || '')) hooks.changed();
+        if (S.sq.length) skick(200);
+      }
+      pids.reduce(function (p, pid) {
+        return p.then(function () {
+          return pullOne(pid).then(function (r) {
+            if (r.changed) changed = true;
+            if (r.ok) { S.perr = ''; S.pull_at = new Date().toISOString(); sreconcile(pid); }
+          });
+        });
+      }, Promise.resolve()).then(finish, function () { S.perr = 'network'; finish(); });
+    }, delay || 0);
+  }
+  function storeStatus(pid) {
+    var tok = !!(storeOn() && token(pid));
+    return { on: storeOn(), tok: tok, bad: tok && !!S && S.auth[pid] === 'bad', pull_at: (S && S.pull_at) || '', ok_at: (S && S.sok_at) || '', err: (S && S.serr) || '', perr: (S && S.perr) || '', rej: (S && S.srej) || 0 };
+  }
+
+  return { FIELDS: FIELDS, init: init, state: state, put: put, reconcile: reconcile, pendingFor: pendingFor, isSynced: isSynced,
+           retry: retry, status: status, fields: fields, encode: encode,
+           setToken: setToken, hasToken: hasToken, storeStatus: storeStatus, pull: pullAll };
+})();
+
+/* ===================== Sổ đo tại nhà: trang người bệnh dùng trên điện thoại =====================
+   Trang mở bằng liên kết công khai, không chứa hồ sơ bệnh án. Mỗi lần lưu, sửa hay xoá, trang tự gửi số đo về
+   hệ thống của bác sĩ (entry_sync.js); điện thoại giữ bản sao để xem lịch sử và gửi lại khi mất mạng.
+   Tin nhắn Zalo vẫn soạn được khi người dùng muốn hỏi thêm; bảng theo dõi của bác sĩ đọc đúng mẫu tin nhắn này. */
+var CONF = JSON.parse(document.getElementById('cfg-data').textContent);
+var KEY = 'so-do-tai-nha-v1';
+var PEOPLE_IDS = Object.keys(CONF.people);
+var DOC = CONF.doctor_short || 'BS';
+var DOC_ZALO = String(CONF.doctor_zalo || '').replace(/\D/g, '');   // doctor's Zalo number: the send screen opens https://zalo.me/<number>
+function zaloFmt(d) { return d.length === 10 ? d.slice(0, 4) + ' ' + d.slice(4, 7) + ' ' + d.slice(7) : d; }
+var HASH = {}; PEOPLE_IDS.forEach(function (p) { if (CONF.people[p].slug) HASH[CONF.people[p].slug] = p; });
+// liên kết riêng có dạng #minh.MÃ: phần trước dấu chấm chọn người, phần sau là mã vào kho chung. Trang lưu mã rồi giữ nguyên liên kết,
+// nên thêm trang ra màn hình chính từ liên kết này vẫn mang mã theo.
+function takeHash() {
+  var h = SODOLOG.parseHash(location.hash), p = HASH[h.slug] || null;
+  if (p && h.token) SYNC.setToken(p, h.token);
+  return p;
+}
+ZMSG.setPeople(PEOPLE_IDS.map(function (p) { return { pid: p, keys: CONF.people[p].match || [] }; }));
+var ST = { pid: null, screen: 'today', kind: 'bp', store: true, data: {}, form: {}, when: { edit: false, date: '', time: '' }, errs: {},
+           result: null, celebrate: null, resend: false, del: null, delTimer: null, histDays: 21, editId: null, editWhen: null };
+
+/* ---------- chế độ nhúng: trang chạy trong khung của bảng theo dõi cùng địa chỉ, không có đầu trang, thanh dưới và thông báo nổi ---------- */
+var EMBED = (function () {
+  try { return /[?&]embed=1(&|$)/.test(location.search) && window.parent !== window && window.parent.location.origin === location.origin; } catch (e) { return false; }
+})();
+if (EMBED) document.documentElement.className += ' embed';
+function toParent(o) { if (!EMBED) return; o.sdtn = 1; try { window.parent.postMessage(o, location.origin); } catch (e) { /* khung cha đã đóng */ } }
+function toTop() { if (EMBED) toParent({ k: 'top' }); else window.scrollTo(0, 0); }
+function keepY(y) { if (!EMBED) window.scrollTo(0, y); }
+var sizeLast = 0;
+function reportSize() {
+  if (!EMBED) return;
+  var h = Math.ceil(document.body.getBoundingClientRect().height);
+  if (h && h !== sizeLast) { sizeLast = h; toParent({ k: 'size', h: h }); }
+}
+if (EMBED) {
+  try { new ResizeObserver(reportSize).observe(document.body); } catch (e) { window.addEventListener('load', reportSize); window.addEventListener('resize', reportSize); }
+}
+function $(s, r) { return (r || document).querySelector(s); }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function ic(name, cls) { return '<svg class="ic' + (cls ? ' ' + cls : '') + '" aria-hidden="true" focusable="false"><use href="#i-' + name + '"></use></svg>'; }
+function chip(cls, text) { return '<span class="chip st-' + cls + '"><i class="dot" aria-hidden="true"></i>' + esc(text) + '</span>'; }
+var toastTimer = null;
+function toast(msg, ms) { if (EMBED) { toParent({ k: 'toast', msg: msg, ms: ms || 3200 }); return; } var t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.hidden = true; }, ms || 3200); }
+function pad(n) { return (n < 10 ? '0' : '') + n; }
+function vn(x) { return String(x).replace('.', ','); }
+function numIn(s) { s = String(s == null ? '' : s).trim().replace(',', '.'); if (!s) return null; var n = Number(s); return isFinite(n) ? n : NaN; }
+function localParts(d) { return { date: d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()), time: pad(d.getHours()) + ':' + pad(d.getMinutes()) }; }
+function localTime(iso) { var d = new Date(iso); return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+function toggleIn(arr, v) { var i = arr.indexOf(v); if (i >= 0) arr.splice(i, 1); else arr.push(v); }
+
+/* ---------- lưu trên điện thoại ---------- */
+function load() {
+  var o = null;
+  try { var raw = window.localStorage.getItem(KEY); o = raw ? JSON.parse(raw) : null; } catch (e) { ST.store = false; }
+  ST.data = (o && o.people) || {};
+  PEOPLE_IDS.forEach(function (p) { var d = ST.data[p] || (ST.data[p] = {}); d.entries = Array.isArray(d.entries) ? d.entries : []; d.sent = d.sent || {}; });
+  SYNC.init(CONF.sync, (o && o.sync) || {}, { save: persist, changed: syncChanged, people: function () { return ST.data; } });
+  return o;
+}
+function persist() {
+  try { window.localStorage.setItem(KEY, JSON.stringify({ v: 2, last: ST.pid, people: ST.data, sync: SYNC.state() })); ST.store = true; }
+  catch (e) { ST.store = false; }
+}
+// trạng thái gửi đổi: vẽ lại trang, trừ lúc đang gõ số thì chỉ cập nhật số đếm để không mất chỗ con trỏ
+function syncChanged() {
+  if (!ST.pid) return;
+  var ae = document.activeElement;
+  if (ST.screen === 'entry' && ae && /^(INPUT|TEXTAREA)$/.test(ae.tagName)) { navCount(); return; }
+  render();
+}
+function navCount() { var n = SYNC.status(ST.pid).n, c = $('#nav-count'); if (c) { c.textContent = n; c.hidden = !n; } }
+function syncText(iso) { var d = new Date(iso); return isNaN(d.getTime()) ? '' : localTime(iso) + ' ngày ' + dvDate(localParts(d).date); }
+function who() { return CONF.people[ST.pid]; }
+function mine() { return ST.data[ST.pid]; }
+function callName() { var g = who().greet; return g.charAt(0).toLowerCase() + g.slice(1); }
+function pron() { return who().pron || 'bạn'; }
+function stateNow() { return DG.compute(who(), CONF.game, mine().entries); }
+var ALPH = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+function newCode() {
+  var used = {}; mine().entries.forEach(function (e) { used[e.code] = 1; });
+  for (var k = 0; k < 20; k++) {
+    var a = new Uint8Array(6), out = '';
+    try { window.crypto.getRandomValues(a); } catch (e) { for (var i = 0; i < 6; i++) a[i] = Math.floor(Math.random() * 256); }
+    for (var j = 0; j < 6; j++) out += ALPH[a[j] % 32];
+    if (!used[out]) return out;
+  }
+  return 'X' + Date.now().toString(36).toUpperCase().slice(-7);
+}
+function sendable(e) { return !(e.type === 'habit' && !(e.done || []).length); }
+function findEntry(id) { return mine().entries.filter(function (e) { return e.id === id; })[0] || null; }
+
+/* ---------- điểm, cấp, huy hiệu ---------- */
+function feedback(b, a) {
+  if (a.level.lv > b.level.lv) ST.celebrate = { kind: 'level', lv: a.level.lv, name: a.level.name };
+  else {
+    var had = {}; b.badges.forEach(function (x) { if (x.got) had[x.id] = 1; });
+    var nb = a.badges.filter(function (x) { return x.got && !had[x.id]; })[0];
+    if (nb) ST.celebrate = { kind: 'badge', name: nb.name, how: nb.how, icon: nb.icon };
+  }
+  return a.xp - b.xp;
+}
+function celebrateHTML() {
+  var c = ST.celebrate; if (!c) return '';
+  var title = c.kind === 'level' ? 'Chúc mừng ' + callName() + ' lên cấp ' + c.lv + ': ' + c.name : 'Huy hiệu mới: ' + c.name;
+  var sub = c.kind === 'level' ? 'Giữ nhịp đều mỗi ngày để lên cấp tiếp theo.' : c.how;
+  return '<section class="celebrate" role="status"><span class="b-medal">' + ic(c.kind === 'level' ? 'trophy' : c.icon) + '</span><div><b>' + esc(title) + '</b><span>' + esc(sub) + '</span></div>' +
+    '<button type="button" class="btn btn-ghost" data-act="cel-close" aria-label="Đóng">' + ic('close') + '</button></section>';
+}
+function toggleHabit(hid) {
+  var today = DG.todayVN(), id = 'H' + today.slice(2).replace(/-/g, ''), list = mine().entries;
+  var e = list.filter(function (x) { return x.id === id; })[0], b = stateNow();
+  if (!e) { e = { id: id, code: id, type: 'habit', t: DG.noonISO(today), day: today, done: [], rev: 0 }; list.push(e); }
+  var was = e.done.indexOf(hid) >= 0;
+  toggleIn(e.done, hid);
+  e.rev = (e.rev || 0) + 1;
+  SYNC.put(ST.pid, e, 'save', 1800);   // bấm liền nhiều việc thì gộp thành một lần gửi
+  persist();
+  var gain = feedback(b, stateNow());
+  toast(was ? 'Đã bỏ đánh dấu' : gain > 0 ? 'Tốt lắm, +' + gain + ' điểm' : 'Đã đánh dấu');
+  render();
+}
+
+/* ---------- trang Hôm nay ---------- */
+function weekCount(st, hid) { var ws = DG.weekStart(st.today), n = 0; for (var i = 0; i < 7; i++) { var r = st.days[DG.addDays(ws, i)]; if (r && r.habits[hid]) n++; } return n; }
+function habitLabel(hid) { var h = who().habits.filter(function (x) { return x.id === hid; })[0]; return h ? h.label : hid; }
+function lastOf(type, field) { var xs = mine().entries.filter(function (e) { return e.type === type && e[field] != null; }).sort(function (a, b) { return a.t < b.t ? -1 : 1; }); return xs[xs.length - 1] || null; }
+function phoneFocus(cfg, st) {
+  return cfg.focus.map(function (f) {
+    var o = { title: f.title, goal: f.goal, tip: f.tip, statusHTML: '', chip: '' };
+    if (f.metric === 'bp') {
+      var b = st.bp7;
+      if (b) {
+        var ok = b.sbp < 130 && b.dbp < 80;
+        o.statusHTML = '<div class="fc-now"><span class="big">' + Math.round(b.sbp) + '/' + Math.round(b.dbp) + '<small>mmHg</small></span><span class="small muted">Trung bình ' + b.n + ' lần đo, 7 ngày qua</span></div>';
+        o.chip = chip(ok ? 'good' : 'warn', ok ? 'Đạt mục tiêu' : 'Cần cải thiện');
+      } else { o.statusHTML = '<div class="fc-now small">Chưa có số đo trong 7 ngày qua.</div>'; o.chip = chip('info', 'Cần đo'); }
+    } else if (f.metric === 'weight') {
+      var w = lastOf('weight', 'weight'), wa = lastOf('weight', 'waist');
+      if (w || wa) {
+        var recent = w && DG.dayOf(w) >= DG.addDays(st.today, -6);
+        o.statusHTML = '<div class="fc-now">' + (w ? '<span class="big">' + vn(w.weight) + '<small>kg</small></span>' : '') + '<span class="small muted">' +
+          (w ? 'Cân ngày ' + dvDate(DG.dayOf(w)) : 'Chưa có số cân') + (wa ? '; vòng eo ' + vn(wa.waist) + ' cm' : '; chưa đo vòng eo') + '</span></div>';
+        o.chip = recent ? chip('good', 'Đã cân tuần này') : chip('info', 'Nên cân tuần này');
+      } else { o.statusHTML = '<div class="fc-now small">Chưa có số cân trên sổ. Cân một lần trong tuần này để có mốc theo dõi.</div>'; o.chip = chip('info', 'Cần cân'); }
+    } else if (f.metric && f.metric.indexOf('habit:') === 0 && !f.habits_for) {
+      o.statusHTML = '<div class="fc-now small">Tuần này đã làm <b>' + weekCount(st, f.metric.slice(6)) + '</b>/7 ngày.</div>';
+    }
+    if (f.habits_for) {
+      var hs = f.habits_for.filter(function (hid) { return cfg.habits.some(function (h) { return h.id === hid; }); });
+      o.statusHTML += '<ul class="fc-habits" aria-label="Tuần này">' + hs.map(function (hid) { var n = weekCount(st, hid); return '<li><span>' + esc(habitLabel(hid)) + '</span>' + dvBar(n / 7, n >= 5 ? 'good' : '') + '<b>' + n + '/7</b></li>'; }).join('') + '</ul>';
+      if (!f.metric) o.statusHTML += '<p class="small muted">Kết quả xét nghiệm do ' + DOC + ' theo dõi và báo lại sau mỗi lần thử máu.</p>';
+    }
+    return o;
+  });
+}
+function phoneAgenda(cfg, today) {
+  return cfg.agenda.map(function (a) {
+    return { label: a.label, when: a.kind === 'todo' ? '' : a.when, kind: a.kind, text: dvAgendaText(a.kind, a.when, a.freq, today),
+             k: a.kind === 'todo' ? '0' : (a.when < today.slice(0, a.when.length) ? '1' + a.when : '2' + a.when) };
+  }).sort(function (a, b) { return a.k < b.k ? -1 : a.k > b.k ? 1 : 0; });
+}
+function todayHTML() {
+  var cfg = who(), st = stateNow(), sv = SYNC.status(ST.pid), n = sv.n, h = celebrateHTML();
+  if (sv.on && !SYNC.state().ack) h += '<section class="card stack welcome"><h3>' + ic('send') + 'Số đo tự gửi cho ' + DOC + '</h3>' +
+    '<p>Mỗi lần ' + pron() + ' bấm Lưu, số đo được gửi thẳng về hệ thống theo dõi của ' + DOC + ', không cần chép gửi Zalo. Nhập sai thì vào Lịch sử bấm Sửa, bản sửa cũng tự gửi.</p>' +
+    '<p class="small muted">Số đo chỉ dùng để ' + DOC + ' theo dõi sức khoẻ cho ' + pron() + '.</p>' +
+    '<div class="row"><button type="button" class="btn btn-p" data-act="sync-ack">' + ic('check', 'sm') + 'Đã hiểu</button></div></section>';
+  if (!mine().entries.length) h += '<section class="card stack welcome"><h3>' + ic('sparkle') + 'Cách dùng sổ</h3><ol class="steps">' +
+    '<li>Mỗi ngày, bấm vào việc đã làm xong để được cộng điểm.</li><li>Đo huyết áp, cân nặng thì bấm Nhập số đo ở thanh dưới, nhập số rồi bấm Lưu.</li>' +
+    '<li>Số đo tự gửi về cho ' + DOC + '. Nhập sai thì vào Lịch sử, bấm Sửa hoặc Xoá.</li>' +
+    '<li>Giữ tin nhắn có liên kết trang này trong Zalo, hoặc thêm trang ra màn hình chính để mở lại mỗi ngày.</li></ol>' +
+    '<details class="howto"><summary>Thêm trang ra màn hình chính</summary><ol><li>iPhone: mở trang bằng Safari, bấm nút Chia sẻ, chọn Thêm vào MH chính.</li>' +
+    '<li>Android: mở trang bằng Chrome, bấm dấu ba chấm ở góc trên, chọn Thêm vào màn hình chính.</li></ol></details></section>';
+  var note = n ? '<span>Còn <b>' + n + '</b> mục chờ gửi ' + DOC + '. ' + whyWait(sv) + '</span>' +
+    '<button type="button" class="btn btn-p" data-act="sync-retry">' + ic('send', 'sm') + 'Gửi lại</button>' : '';
+  h += '<div class="daily">' + dailyHTML({ cfg: cfg, st: st, name: cfg.greet, motto: cfg.motto, canTick: true, focus: phoneFocus(cfg, st), agenda: phoneAgenda(cfg, st.today), note: note }) + '</div>';
+  return h;
+}
+
+/* ---------- trang Nhập số đo ---------- */
+var KINDS = [['bp', 'Huyết áp', 'cuff'], ['pain', 'Đau', 'face'], ['weight', 'Cân nặng', 'scale'], ['glucose', 'Đường huyết', 'drop'], ['symptom', 'Triệu chứng', 'thermo']];
+var LOCS = ['Đầu', 'Cổ', 'Vai', 'Tay', 'Ngực', 'Bụng', 'Lưng', 'Thắt lưng', 'Hông', 'Gối', 'Cổ chân', 'Bàn chân'];
+var PKIND = ['Âm ỉ', 'Nhói', 'Rát', 'Tê bì', 'Lan xuống tay', 'Lan xuống chân', 'Cứng khớp buổi sáng', 'Đau khi đi lại'];
+var SYMS = ['Sốt', 'Ho', 'Khó thở', 'Đau ngực', 'Hồi hộp', 'Chóng mặt', 'Đau đầu', 'Mệt nhiều', 'Buồn nôn', 'Tiêu chảy', 'Táo bón', 'Tiểu buốt', 'Tiểu ra máu', 'Phù chân', 'Tê yếu tay chân', 'Mất ngủ'];
+var SEVS = ['Nhẹ', 'Vừa', 'Nặng'];
+var CTXS = [['doi', 'Lúc đói'], ['sauan', 'Sau ăn 2 giờ'], ['bat', 'Bất kỳ']];
+var CTXL = { doi: 'lúc đói', sauan: 'sau ăn 2 giờ', bat: 'lúc bất kỳ' };
+function blankForm(k) {
+  if (k === 'bp') return { sbp: '', dbp: '', hr: '', arm: (ST.form.bp && ST.form.bp.arm) || 'trái', note: '' };
+  if (k === 'pain') return { pain: null, loc: [], kind: [], note: '' };
+  if (k === 'weight') return { weight: '', waist: '', note: '' };
+  if (k === 'glucose') return { glu: '', ctx: 'doi', note: '' };
+  return { sym: [], sev: '', temp: '', note: '' };
+}
+function F() { return ST.form[ST.kind] || (ST.form[ST.kind] = blankForm(ST.kind)); }
+function errP(k) { return ST.errs[k] ? '<p class="ferr" role="alert">' + esc(ST.errs[k]) + '</p>' : ''; }
+function numField(id, label, sub, unit, val, mode, wide) {
+  return '<label class="numf' + (ST.errs[id] ? ' bad' : '') + '" for="f-' + id + '"><span class="nl">' + esc(label) + (sub ? '<small>' + esc(sub) + '</small>' : '') + '</span>' +
+    '<input id="f-' + id + '" data-f="' + id + '" type="text" inputmode="' + (mode || 'numeric') + '" autocomplete="off" maxlength="6" value="' + esc(val) + '"' + (wide ? ' class="wide"' : '') + '>' +
+    '<span class="unit">' + esc(unit) + '</span></label>' + errP(id);
+}
+function pressBtns(list, attr, isOn, cls) {
+  return list.map(function (x) { var v = Array.isArray(x) ? x[0] : x, t = Array.isArray(x) ? x[1] : x; return '<button type="button"' + (cls ? ' class="' + cls + '"' : '') + ' data-' + attr + '="' + esc(v) + '" aria-pressed="' + !!isOn(v) + '">' + esc(t) + '</button>'; }).join('');
+}
+function painWord(v) { return v === 0 ? 'Không đau' : v <= 3 ? 'Đau nhẹ' : v <= 6 ? 'Đau vừa' : 'Đau nhiều'; }
+function painZone(v) { return v === 0 ? 'pz-good' : v <= 3 ? 'pz-ok' : v <= 6 ? 'pz-warn' : v <= 8 ? 'pz-serious' : 'pz-crit'; }
+function formBody() {
+  var k = ST.kind, f = F();
+  if (k === 'bp') return '<h3>' + ic('cuff') + 'Huyết áp</h3><div class="numgrid">' +
+    numField('sbp', 'Số trên', 'Dòng SYS trên máy đo', 'mmHg', f.sbp) + numField('dbp', 'Số dưới', 'Dòng DIA', 'mmHg', f.dbp) +
+    numField('hr', 'Mạch', 'Dòng PULSE, không bắt buộc', 'lần/phút', f.hr) + '</div>' +
+    '<fieldset><legend>Đo tay nào</legend><div class="seglg">' + pressBtns([['trái', 'Tay trái'], ['phải', 'Tay phải']], 'arm', function (v) { return f.arm === v; }) + '</div></fieldset>' +
+    '<details class="howto"><summary>Cách đo cho đúng</summary><ol><li>Ngồi tựa lưng, nghỉ 5 phút; không uống cà phê, không hút thuốc trong 30 phút trước khi đo.</li>' +
+    '<li>Hai bàn chân đặt trên sàn, không bắt chéo chân; tay đặt trên bàn, băng quấn ngang tim.</li><li>Không nói chuyện khi đo. Đo 2 lần cách nhau 1 phút, ghi cả hai lần.</li>' +
+    '<li>Buổi sáng đo trước khi uống thuốc và ăn sáng; buổi tối đo trước khi đi ngủ.</li></ol></details>';
+  if (k === 'pain') return '<h3>' + ic('face') + 'Mức đau</h3><fieldset><legend>Chọn một số từ 0 đến 10</legend><div class="painscale">' +
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(function (v) { return '<button type="button" class="' + painZone(v) + '" data-pain="' + v + '" aria-pressed="' + (f.pain === v) + '" aria-label="' + v + ', ' + painWord(v) + '">' + v + '</button>'; }).join('') +
+    '</div><p class="pain-word" aria-live="polite">' + (f.pain == null ? 'Chưa chọn mức đau' : f.pain + ' điểm: ' + painWord(f.pain)) + '</p>' + errP('pain') + '</fieldset>' +
+    '<fieldset><legend>Đau ở đâu? Chọn được nhiều chỗ</legend><div class="picks">' + pressBtns(LOCS, 'loc', function (v) { return f.loc.indexOf(v) >= 0; }, 'pick') + '</div></fieldset>' +
+    '<fieldset><legend>Kiểu đau, không bắt buộc</legend><div class="picks">' + pressBtns(PKIND, 'pk', function (v) { return f.kind.indexOf(v) >= 0; }, 'pick') + '</div></fieldset>';
+  if (k === 'weight') return '<h3>' + ic('scale') + 'Cân nặng, vòng eo</h3><div class="numgrid">' +
+    numField('weight', 'Cân nặng', 'Cân buổi sáng, trước khi ăn', 'kg', f.weight, 'decimal', true) +
+    numField('waist', 'Vòng eo', 'Đo ngang rốn, không bắt buộc', 'cm', f.waist, 'decimal', true) + '</div>';
+  if (k === 'glucose') return '<h3>' + ic('drop') + 'Đường huyết</h3><div class="numgrid">' +
+    numField('glu', 'Chỉ số đường huyết', 'Máy hiện mg/dL thì cứ ghi số đó, trang tự đổi', 'mmol/L', f.glu, 'decimal', true) + '</div>' +
+    '<fieldset><legend>Đo lúc nào</legend><div class="seglg">' + pressBtns(CTXS, 'ctx', function (v) { return f.ctx === v; }) + '</div></fieldset>';
+  return '<h3>' + ic('thermo') + 'Triệu chứng</h3><fieldset><legend>Chọn triệu chứng, được nhiều mục</legend><div class="picks">' +
+    pressBtns(SYMS, 'sym', function (v) { return f.sym.indexOf(v) >= 0; }, 'pick') + '</div>' + errP('sym') + '</fieldset>' +
+    '<fieldset><legend>Mức độ</legend><div class="seglg">' + pressBtns(SEVS, 'sev', function (v) { return f.sev === v; }) + '</div></fieldset>' +
+    '<div class="numgrid">' + numField('temp', 'Nhiệt độ', 'Nếu có đo', 'độ C', f.temp, 'decimal', true) + '</div>';
+}
+function whenHTML() {
+  var w = ST.when;
+  if (!w.edit) return '<div class="when">' + ic('clock') + '<span>Thời điểm đo: <b>bây giờ</b></span><button type="button" class="btn" data-act="when-edit">Đổi ngày giờ</button></div>';
+  return '<div class="when"><div class="when-edit"><label>Ngày đo<input type="date" data-w="date" value="' + esc(w.date) + '" max="' + localParts(new Date()).date + '"></label>' +
+    '<label>Giờ đo<input type="time" data-w="time" value="' + esc(w.time) + '"></label></div><button type="button" class="btn btn-ghost" data-act="when-now">Dùng giờ hiện tại</button></div>' + errP('when');
+}
+function entryHTML() {
+  var ed = ST.editId ? findEntry(ST.editId) : null, h;
+  if (ed) {
+    h = '<div class="sec-head"><h2>Sửa số đo</h2><p>Sửa lại cho đúng rồi bấm Lưu thay đổi; trang tự gửi bản đã sửa cho ' + DOC + '.</p></div>' +
+      '<div class="note edit-note"><span>Đang sửa: <b>' + esc(valueText(ed)) + '</b>, đo lúc ' + localTime(ed.t) + ' ngày ' + esc(dvDate(DG.dayOf(ed))) + '.</span>' +
+      '<button type="button" class="btn" data-act="edit-cancel">' + ic('close', 'sm') + 'Huỷ sửa</button></div>';
+  } else {
+    h = '<div class="sec-head"><h2>Nhập số đo</h2><p>Chọn loại cần ghi, nhập số rồi bấm Lưu.</p></div>' + celebrateHTML() + resultHTML();
+    h += '<div class="kinds" role="group" aria-label="Loại số đo">' + KINDS.map(function (k) { return '<button type="button" class="kind" data-kind="' + k[0] + '" aria-pressed="' + (ST.kind === k[0]) + '">' + ic(k[2]) + '<span>' + esc(k[1]) + '</span></button>'; }).join('') + '</div>';
+  }
+  h += '<form class="card form" id="f-entry" novalidate>' + formBody() + whenHTML() +
+    '<label class="stack" for="f-note"><b>Ghi chú thêm, không bắt buộc</b><textarea id="f-note" data-f="note" rows="2" maxlength="300" placeholder="Ví dụ: vừa đi bộ về; quên uống thuốc sáng">' + esc(F().note) + '</textarea></label>' +
+    '<button type="submit" class="btn btn-p btn-xl">' + ic('check') + (ed ? 'Lưu thay đổi' : 'Lưu số đo') + '</button></form>';
+  return h;
+}
+// mở một mục cũ để sửa: điền lại số vào ô, giữ ngày giờ đo
+function formOf(e) {
+  var note = e.note || '';
+  if (e.type === 'bp') return { sbp: String(e.sbp), dbp: String(e.dbp), hr: e.hr != null ? String(e.hr) : '', arm: e.arm || 'trái', note: note };
+  if (e.type === 'pain') return { pain: e.pain, loc: (e.loc || []).slice(), kind: e.kind ? String(e.kind).split(', ') : [], note: note };
+  if (e.type === 'weight') return { weight: e.weight != null ? vn(e.weight) : '', waist: e.waist != null ? vn(e.waist) : '', note: note };
+  if (e.type === 'glucose') return { glu: e.glu != null ? vn(e.glu) : '', ctx: e.ctx || 'doi', note: note };
+  return { sym: (e.sym || []).slice(), sev: e.sev || '', temp: e.temp != null ? vn(e.temp) : '', note: note };
+}
+function startEdit(id) {
+  var e = findEntry(id); if (!e || e.type === 'habit') return;
+  var p = localParts(new Date(e.t));
+  ST.editId = id; ST.kind = e.type; ST.form[e.type] = formOf(e); ST.errs = {}; ST.result = null; ST.celebrate = null; ST.del = null;
+  ST.when = { edit: true, date: p.date, time: p.time }; ST.editWhen = { date: p.date, time: p.time };
+  ST.screen = 'entry'; render(); toTop();
+}
+function endEdit() {
+  if (!ST.editId) return;
+  ST.form[ST.kind] = blankForm(ST.kind); ST.when = { edit: false, date: '', time: '' }; ST.editId = null; ST.editWhen = null;
+}
+function bpAdvice(s, d, hr) {
+  if (s >= 180 || d >= 110) return ['crit', 'Rất cao', 'Ngồi nghỉ 5 phút rồi đo lại. Nếu vẫn từ 180/110 trở lên, gọi ' + DOC + ' ngay; nếu kèm đau ngực, khó thở, yếu liệt, nói khó, nhìn mờ thì gọi cấp cứu 115.'];
+  if (s < 90 || d < 60) return ['warn', 'Thấp', 'Ngồi hoặc nằm nghỉ, uống nước; nếu choáng váng thì báo ' + DOC + '.'];
+  if (hr && (hr < 50 || hr > 120)) return ['warn', 'Mạch cần xem lại', 'Mạch ngoài khoảng 50-120 lần/phút. Nghỉ ngơi rồi đo lại; nếu kéo dài hoặc kèm hồi hộp, khó thở thì báo ' + DOC + '.'];
+  if (s >= 140 || d >= 90) return ['warn', 'Cao hơn mục tiêu', 'Nghỉ 5 phút rồi đo lại. Nếu nhiều ngày liền vẫn cao, BS sẽ xem lại thuốc.'];
+  if (s >= 130 || d >= 80) return ['info', 'Hơi cao', 'Gần mục tiêu dưới 130/80. Ăn nhạt, đi bộ đều sẽ giúp hạ thêm.'];
+  return ['good', 'Trong mục tiêu', 'Huyết áp đẹp. Giữ nhịp đo đều mỗi ngày.'];
+}
+function adviceOf(e) {
+  if (e.type === 'bp') return bpAdvice(e.sbp, e.dbp, e.hr);
+  if (e.type === 'pain') {
+    var k = (e.kind || '').toLowerCase();
+    if ((e.loc || []).indexOf('Ngực') >= 0) return ['crit', 'Đau ngực', 'Nếu đau thắt, đè nặng, lan lên vai, hàm, kéo dài trên 15 phút hoặc kèm khó thở, vã mồ hôi thì gọi cấp cứu 115 ngay. Các trường hợp khác, báo ' + DOC + ' trong hôm nay.'];
+    if (/tê bì|lan xuống/.test(k) && e.pain >= 4) return ['warn', 'Cần theo dõi', 'Nếu tê, yếu tay chân tăng dần, đi lại vụng về hoặc cầm đồ hay rơi thì báo ' + DOC + ' trong hôm nay.'];
+    if (e.pain >= 7) return ['warn', 'Đau nhiều', 'Nghỉ ngơi, chỉ dùng thuốc giảm đau BS đã dặn và báo ' + DOC + ' trong hôm nay.'];
+    if (e.pain >= 4) return ['info', 'Đau vừa', 'Nghỉ ngơi, chườm ấm nếu đau cơ. Đau kéo dài quá 3 ngày thì báo ' + DOC + '.'];
+    return ['good', 'Đã ghi', 'Ghi lại mỗi khi mức đau thay đổi để BS theo dõi.'];
+  }
+  if (e.type === 'glucose') {
+    var g = e.glu;
+    if (g < 3.9) return ['crit', 'Thấp', 'Uống ngay nửa ly nước trái cây hoặc 3 muỗng cà phê đường pha nước, 15 phút sau đo lại và báo ' + DOC + '.'];
+    if (g >= 16.7) return ['crit', 'Rất cao', 'Uống nước lọc, đo lại sau 1 giờ và báo ' + DOC + ' ngay; nếu mệt lả, lơ mơ thì gọi cấp cứu 115.'];
+    if ((e.ctx === 'doi' && g >= 7) || g >= 11.1) return ['warn', 'Cao', 'Cao hơn mức nên có. Báo ' + DOC + ' để xem lại.'];
+    if (e.ctx === 'doi' && g >= 5.6) return ['info', 'Hơi cao', 'Lúc đói hơi cao: bớt cơm trắng, bánh ngọt; đi bộ 10 phút sau bữa ăn.'];
+    return ['good', 'Tốt', 'Đường huyết trong khoảng tốt.'];
+  }
+  if (e.type === 'symptom') {
+    var s = (e.sym || []).join(', ').toLowerCase();
+    if (/khó thở|đau ngực/.test(s)) return ['crit', 'Cần chú ý ngay', 'Khó thở hoặc đau ngực: gọi cấp cứu 115 nếu nặng, kéo dài hoặc đến đột ngột; báo ' + DOC + ' ngay.'];
+    if (/tiểu ra máu|tê yếu/.test(s)) return ['warn', 'Báo BS trong ngày', 'Báo ' + DOC + ' trong hôm nay để BS hướng dẫn thêm.'];
+    if ((e.temp && e.temp >= 38.5) || (/sốt/.test(s) && e.sev === 'Nặng')) return ['warn', 'Sốt', 'Uống đủ nước, nghỉ ngơi. Báo ' + DOC + ' trước khi dùng kháng sinh.'];
+    if (e.sev === 'Nặng') return ['warn', 'Nặng', 'Báo ' + DOC + ' trong hôm nay.'];
+    return ['info', 'Đã ghi', 'Nhớ gửi ' + DOC + ' để BS theo dõi.'];
+  }
+  if (e.type === 'weight') {
+    var prev = mine().entries.filter(function (x) { return x !== e && x.type === 'weight' && x.weight != null && x.t < e.t; }).sort(function (a, b) { return a.t < b.t ? -1 : 1; }).pop();
+    var t = 'Cân mỗi tuần một lần, cùng giờ buổi sáng để so sánh chính xác.';
+    if (prev && e.weight != null) {
+      var dlt = Math.round((e.weight - prev.weight) * 10) / 10;
+      t = 'So với lần cân ngày ' + dvDate(DG.dayOf(prev)) + ': ' + (dlt < 0 ? 'giảm ' + vn(-dlt) + ' kg, rất tốt.' : dlt > 0 ? 'tăng ' + vn(dlt) + ' kg. Tuần này thêm đi bộ, bớt tinh bột nhanh.' : 'giữ nguyên.') ;
+    }
+    return ['good', 'Đã ghi', t];
+  }
+  return ['info', 'Đã ghi', ''];
+}
+function valueText(e) {
+  if (e.type === 'bp') return e.sbp + '/' + e.dbp + ' mmHg' + (e.hr ? ', mạch ' + e.hr : '');
+  if (e.type === 'pain') return 'Đau ' + e.pain + '/10' + (e.loc && e.loc.length ? ', ' + e.loc.join(', ').toLowerCase() : '');
+  if (e.type === 'weight') return [e.weight != null ? vn(e.weight) + ' kg' : '', e.waist != null ? 'vòng eo ' + vn(e.waist) + ' cm' : ''].filter(Boolean).join(', ');
+  if (e.type === 'glucose') return vn(e.glu) + ' mmol/L, ' + (CTXL[e.ctx] || '');
+  if (e.type === 'symptom') return (e.sym || []).join(', ') + (e.temp != null ? '; ' + vn(e.temp) + ' độ C' : '');
+  if (e.type === 'habit') return 'Đã làm: ' + (e.done || []).map(habitLabel).join('; ');
+  return '';
+}
+function valueParts(e) {
+  if (e.type === 'bp') return [e.sbp + '/' + e.dbp + ' mmHg', [e.hr ? 'Mạch ' + e.hr : '', e.arm ? 'tay ' + e.arm : ''].filter(Boolean).join(', ')];
+  if (e.type === 'pain') return ['Đau ' + e.pain + '/10', [(e.loc || []).join(', '), e.kind || ''].filter(Boolean).join('; ')];
+  if (e.type === 'weight') return e.weight != null ? [vn(e.weight) + ' kg', e.waist != null ? 'Vòng eo ' + vn(e.waist) + ' cm' : ''] : ['Vòng eo ' + vn(e.waist) + ' cm', ''];
+  if (e.type === 'glucose') return [vn(e.glu) + ' mmol/L', 'Đo ' + (CTXL[e.ctx] || '')];
+  if (e.type === 'symptom') return [(e.sym || []).join(', ') || 'Triệu chứng', [e.sev ? 'Mức ' + e.sev.toLowerCase() : '', e.temp != null ? vn(e.temp) + ' độ C' : ''].filter(Boolean).join(', ')];
+  return [valueText(e), ''];
+}
+// chip trạng thái gửi của một mục
+function syncChip(e) {
+  var sv = SYNC.status(ST.pid);
+  if (SYNC.isSynced(ST.pid, e)) return chip('good', 'Đã gửi BS');
+  if (!sv.on) return chip('none', 'Chỉ lưu trên máy');
+  return chip('info', sv.offline || sv.err ? 'Chờ gửi' : 'Đang gửi');
+}
+function resultHTML() {
+  var r = ST.result; if (!r) return '';
+  var a = r.adv, cls = a[0] === 'crit' ? 'crit' : a[0] === 'warn' ? 'warn' : a[0] === 'good' ? 'good' : 'info', sv = SYNC.status(ST.pid), sent = SYNC.isSynced(ST.pid, r.e);
+  return '<section class="card result ' + cls + '" role="status"><div class="r-top">' + chip(cls, a[1]) + syncChip(r.e) + (r.gain > 0 ? '<span class="r-xp">' + ic('star', 'sm') + '+' + r.gain + ' điểm</span>' : '') +
+    '<span class="small muted">' + (r.edited ? 'Đã sửa, đo lúc ' : 'Đã lưu, đo lúc ') + localTime(r.e.t) + '</span></div>' +
+    '<div class="r-val"><b>' + esc(valueParts(r.e)[0]) + '</b>' + (valueParts(r.e)[1] ? '<span>' + esc(valueParts(r.e)[1]) + '</span>' : '') + '</div>' + (a[2] ? '<p class="r-adv">' + esc(a[2]) + '</p>' : '') +
+    (!sent && sv.on && (sv.offline || sv.err) ? '<p class="small">' + (sv.offline || sv.err === 'network' ? 'Chưa gửi được vì điện thoại mất mạng hoặc mạng chập chờn.' : 'Hệ thống của ' + DOC + ' chưa nhận được.') + ' Số đo đã lưu trên điện thoại, trang tự gửi lại sau.</p>' : '') +
+    (cls === 'crit' ? '<div class="note crit"><b>Gọi cấp cứu 115</b> khi có đau ngực, khó thở, yếu hoặc liệt nửa người, nói khó, méo miệng, ngất.</div>' : '') +
+    '<div class="row">' + (cls === 'crit' || cls === 'warn' ? '<button type="button" class="btn btn-p" data-screen="send">' + ic('chat', 'sm') + 'Nhắn Zalo cho BS</button>' : '') +
+    '<button type="button" class="btn" data-act="result-close">' + ic('plus', 'sm') + 'Nhập thêm</button></div></section>';
+}
+function saveEntry() {
+  var k = ST.kind, f = F(), errs = {}, e = { type: k }, t = null, old = ST.editId ? findEntry(ST.editId) : null;
+  if (old && ST.when.edit && ST.editWhen && ST.when.date === ST.editWhen.date && ST.when.time === ST.editWhen.time) t = old.t;   // giữ nguyên giờ đo cũ
+  else if (ST.when.edit) {
+    var d = ST.when.date && ST.when.time ? new Date(ST.when.date + 'T' + ST.when.time) : null;
+    if (!d) errs.when = 'Chọn đủ ngày và giờ đo.';
+    else if (isNaN(d.getTime())) errs.when = 'Ngày giờ chưa đúng.';
+    else if (d.getTime() > Date.now() + 5 * 60000) errs.when = 'Giờ đo không được sau giờ hiện tại.';
+    else if (d.getTime() < Date.now() - 62 * 86400000) errs.when = 'Chỉ ghi được số đo trong 2 tháng gần đây.';
+    else t = d.toISOString();
+  } else t = new Date().toISOString();
+  e.t = t;
+  function int(v, lo, hi) { return v != null && !isNaN(v) && v % 1 === 0 && v >= lo && v <= hi; }
+  if (k === 'bp') {
+    var s = numIn(f.sbp), dd = numIn(f.dbp), hr = numIn(f.hr);
+    if (s == null) errs.sbp = 'Nhập số trên.'; else if (!int(s, 60, 260)) errs.sbp = 'Số trên thường từ 60 đến 260, số nguyên.';
+    if (dd == null) errs.dbp = 'Nhập số dưới.'; else if (!int(dd, 30, 160)) errs.dbp = 'Số dưới thường từ 30 đến 160, số nguyên.';
+    if (!errs.sbp && !errs.dbp && dd >= s) errs.dbp = 'Số dưới phải nhỏ hơn số trên; kiểm tra lại.';
+    if (hr != null && !int(hr, 30, 220)) errs.hr = 'Mạch thường từ 30 đến 220.';
+    e.sbp = s; e.dbp = dd; if (hr != null) e.hr = hr; e.arm = f.arm;
+  } else if (k === 'pain') {
+    if (f.pain == null) errs.pain = 'Chọn mức đau từ 0 đến 10.';
+    e.pain = f.pain; if (f.loc.length) e.loc = f.loc.slice(); if (f.kind.length) e.kind = f.kind.join(', ');
+  } else if (k === 'weight') {
+    var w = numIn(f.weight), wa = numIn(f.waist);
+    if (w == null && wa == null) errs.weight = 'Nhập cân nặng hoặc vòng eo.';
+    if (w != null && !(w >= 25 && w <= 250)) errs.weight = 'Cân nặng thường từ 25 đến 250 kg.';
+    if (wa != null && !(wa >= 40 && wa <= 200)) errs.waist = 'Vòng eo thường từ 40 đến 200 cm.';
+    if (w != null) e.weight = Math.round(w * 10) / 10; if (wa != null) e.waist = Math.round(wa * 10) / 10;
+  } else if (k === 'glucose') {
+    var g = numIn(f.glu);
+    if (g == null) errs.glu = 'Nhập chỉ số đường huyết.';
+    else if (isNaN(g) || g < 1 || g > 630) errs.glu = 'Số chưa đúng; kiểm tra lại trên máy đo.';
+    else { if (g > 35) g = g / 18.016; e.glu = Math.round(g * 10) / 10; }
+    e.ctx = f.ctx;
+  } else {
+    var tp = numIn(f.temp);
+    if (!f.sym.length && !(f.note || '').trim()) errs.sym = 'Chọn ít nhất một triệu chứng hoặc ghi chú.';
+    if (tp != null && !(tp >= 34 && tp <= 43)) errs.temp = 'Nhiệt độ thường từ 34 đến 43 độ C.';
+    e.sym = f.sym.slice(); if (f.sev) e.sev = f.sev; if (tp != null) e.temp = Math.round(tp * 10) / 10;
+  }
+  if ((f.note || '').trim()) e.note = f.note.trim().slice(0, 300);
+  ST.errs = errs;
+  if (Object.keys(errs).length) { render(); var bad = document.querySelector('.numf.bad input, .ferr'); if (bad) { bad.scrollIntoView({ block: 'center' }); if (bad.focus) bad.focus(); } return; }
+  var b = stateNow(), list = mine().entries;
+  if (old) { e.id = old.id; e.code = old.code; e.rev = (old.rev || 1) + 1; list[list.indexOf(old)] = e; }
+  else { e.code = newCode(); e.id = e.code; e.rev = 1; list.push(e); }
+  SYNC.put(ST.pid, e, 'save', 0);
+  persist();
+  var gain = feedback(b, stateNow());
+  ST.result = { e: e, adv: adviceOf(e), gain: gain, edited: !!old };
+  ST.form[k] = blankForm(k); ST.when = { edit: false, date: '', time: '' }; ST.editId = null; ST.editWhen = null;
+  render(); toTop();
+}
+
+/* ---------- trang Gửi BS ---------- */
+// tin nhắn Zalo: số đo hôm nay, hoặc 7 ngày qua khi đánh dấu ô bên dưới
+function sendList() {
+  var from = ST.resend ? DG.addDays(DG.todayVN(), -6) : DG.todayVN();
+  return mine().entries.filter(function (e) { return sendable(e) && DG.dayOf(e) >= from; });
+}
+// vì sao còn mục chờ gửi, nói theo cách người dùng hiểu
+function whyWait(sv) {
+  if (sv.offline || sv.err === 'offline') return 'Điện thoại đang mất mạng; trang tự gửi lại khi có mạng.';
+  if (sv.err && sv.err !== 'network') return 'Hệ thống của ' + DOC + ' chưa nhận được; trang tự gửi lại sau.';
+  return 'Trang tự gửi lại khi có mạng.';
+}
+// đồng bộ giữa các điện thoại qua kho chung: một dòng trạng thái theo mã riêng của người đang dùng
+function storeNote() {
+  var ss = SYNC.storeStatus(ST.pid);
+  if (!ss.on) return '';
+  if (!ss.tok) return '<p class="note warn">Trang chưa có liên kết riêng của ' + pron() + ', nên số đo chưa hiện trên các điện thoại khác. Mở lại trang bằng liên kết riêng ' + DOC + ' đã gửi, chỉ cần một lần.</p>';
+  if (ss.bad) return '<p class="note warn">Liên kết riêng chưa đúng hoặc đã được đổi, nên chưa đồng bộ được. Nhờ ' + DOC + ' gửi lại liên kết mới.</p>';
+  if (ss.err === 'rejected') return '<p class="note warn">Có số đo hệ thống chung chưa nhận vì giá trị chưa hợp lệ. Xem lại các số trong Lịch sử hoặc báo ' + DOC + '.</p>';
+  return '<p class="note good">' + ic('check', 'sm') + ' Số đo đồng bộ giữa các điện thoại mở bằng liên kết riêng của ' + pron() + '.' + (ss.pull_at ? ' Cập nhật lúc ' + esc(syncText(ss.pull_at)) + '.' : '') + '</p>';
+}
+function syncCardHTML() {
+  var sv = SYNC.status(ST.pid), btn = '<button type="button" class="btn btn-p" data-act="sync-retry">' + ic('send', 'sm') + 'Gửi lại</button>', sn = storeNote();
+  if (!sv.on) return '<section class="card stack"><p class="note warn">Trang đang mở ngoài hệ thống của ' + DOC + ' nên chưa gửi được. Số đo vẫn lưu trên điện thoại này; mở lại trang bằng liên kết ' + DOC + ' gửi để số đo tự gửi đi.</p></section>';
+  if (sv.n) return '<section class="card stack"><p class="note warn">Còn <b>' + sv.n + '</b> mục chờ gửi. ' + (sv.busy ? 'Đang gửi. ' : whyWait(sv) + ' ') + 'Muốn gửi luôn thì bấm Gửi lại.</p>' + sn + '<div class="row">' + btn + '</div></section>';
+  return '<section class="card stack"><p class="note good">' + ic('check', 'sm') + ' Đã gửi đủ số đo cho ' + DOC + '.' + (sv.ok_at ? ' Lần gửi gần nhất lúc ' + esc(syncText(sv.ok_at)) + '.' : '') + '</p>' + sn +
+    (SYNC.storeStatus(ST.pid).tok ? '<div class="row"><button type="button" class="btn" data-act="sync-retry">' + ic('send', 'sm') + 'Cập nhật ngay</button></div>' : '') + '</section>';
+}
+function sendHTML() {
+  var list = sendList(), cfg = who();
+  var h = '<div class="sec-head"><h2>Gửi ' + DOC + '</h2><p>Số đo tự gửi về hệ thống theo dõi của ' + DOC + ' mỗi khi ' + pron() + ' bấm Lưu, sửa hay xoá.</p></div>' + syncCardHTML();
+  var resend = '<label class="check-row"><input type="checkbox" id="resend"' + (ST.resend ? ' checked' : '') + '><span>Gồm cả số đo 7 ngày qua</span></label>';
+  h += '<section class="card stack"><div class="card-head"><h3>' + ic('chat') + 'Nhắn thêm cho ' + DOC + ' qua Zalo</h3></div>' +
+    '<p class="small">Không bắt buộc. Dùng khi ' + pron() + ' muốn hỏi ' + DOC + ' về một số đo; trang soạn sẵn tin nhắn gồm các số đo ' + (ST.resend ? '7 ngày qua' : 'hôm nay') + '.</p>';
+  if (!list.length) return h + '<p class="muted">' + (ST.resend ? 'Chưa có số đo nào trong 7 ngày qua.' : 'Hôm nay chưa có số đo nào.') + '</p>' + resend + '</section>';
+  h += '<label for="msg" class="small muted">Tin nhắn soạn sẵn, ' + list.length + ' mục</label><textarea id="msg" readonly rows="8">' + esc(ZMSG.build(cfg.greet, list, cfg)) + '</textarea>' +
+    (DOC_ZALO ? '<a class="btn btn-p btn-xl" href="https://zalo.me/' + DOC_ZALO + '" target="_blank" rel="noopener noreferrer" data-zalo="1">' + ic('send') + 'Mở Zalo nhắn ' + DOC + '</a>' : '') +
+    '<button type="button" class="btn ' + (DOC_ZALO ? '' : 'btn-p ') + 'btn-xl" data-act="copy">' + ic('copy') + 'Chép tin nhắn</button><p id="copy-st" class="note" role="status" hidden></p>' +
+    (DOC_ZALO ? '<ol class="steps"><li><span>Bấm Mở Zalo nhắn ' + DOC + ': trang chép sẵn tin nhắn và mở khung chat Zalo với ' + DOC + ', số <b class="zl-no">' + zaloFmt(DOC_ZALO) + '</b>.</span></li><li>Bấm giữ vào ô soạn tin, chọn Dán, rồi bấm Gửi.</li></ol>'
+      : '<ol class="steps"><li>Bấm nút Chép tin nhắn ở trên.</li><li>Mở Zalo, vào khung chat với ' + DOC + '.</li><li>Bấm giữ vào ô soạn tin, chọn Dán, rồi bấm Gửi.</li></ol>') +
+    resend + '</section>';
+  if (!ST.store) h += '<div class="note warn">Trình duyệt này không giữ được số liệu khi đóng trang. Số đo đã gửi vẫn nằm ở hệ thống của ' + DOC + '; mục chờ gửi sẽ mất nếu đóng trang lúc mất mạng.</div>';
+  return h;
+}
+function setCopy(ok) {
+  var p = $('#copy-st'); if (!p) return;
+  p.hidden = false; p.className = 'note ' + (ok ? 'good' : 'warn');
+  p.textContent = ok ? 'Đã chép. ' + (DOC_ZALO ? 'Bấm Mở Zalo nhắn ' + DOC + ' ở trên, hoặc mở Zalo, vào khung chat với ' + DOC + ', bấm giữ ô soạn tin rồi chọn Dán.' : 'Mở Zalo, vào khung chat với ' + DOC + ', bấm giữ ô soạn tin rồi chọn Dán.') : 'Máy chưa cho chép tự động. Bấm giữ vào ô tin nhắn ở trên, chọn Chọn tất cả rồi Sao chép.';
+}
+// the Zalo link opens a new tab right after the tap, so the message is copied synchronously first
+function zaloCopy() {
+  var ta = $('#msg'); if (!ta) return;
+  var ok = false;
+  try { ta.focus(); ta.select(); ta.setSelectionRange(0, ta.value.length); ok = !!(document.execCommand && document.execCommand('copy')); } catch (e) { ok = false; }
+  if (ok) { setZalo(true); return; }
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ta.value).then(function () { setZalo(true); }, function () { setZalo(false); });
+    else setZalo(false);
+  } catch (e) { setZalo(false); }
+}
+function setZalo(ok) {
+  var p = $('#copy-st'); if (!p) return;
+  p.hidden = false; p.className = 'note ' + (ok ? 'good' : 'warn');
+  p.textContent = ok ? 'Đã chép tin nhắn. Trong khung chat Zalo với ' + DOC + ' vừa mở, bấm giữ ô soạn tin, chọn Dán rồi bấm Gửi.'
+    : 'Máy chưa cho chép tự động. Bấm giữ vào ô tin nhắn ở trên, chọn Chọn tất cả rồi Sao chép, sau đó dán vào khung chat Zalo với ' + DOC + '.';
+}
+function doCopy() {
+  var ta = $('#msg'); if (!ta) return;
+  function fallback() {
+    var ok = false;
+    try { ta.focus(); ta.select(); ta.setSelectionRange(0, ta.value.length); ok = !!(document.execCommand && document.execCommand('copy')); } catch (e) { ok = false; }
+    setCopy(ok);
+  }
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ta.value).then(function () { setCopy(true); }, fallback);
+    else fallback();
+  } catch (e) { fallback(); }
+}
+
+/* ---------- trang Lịch sử ---------- */
+var TYPE_IC = { bp: 'cuff', pain: 'face', weight: 'scale', glucose: 'drop', symptom: 'thermo', habit: 'check' };
+function chartW() { var w = (document.documentElement.clientWidth || window.innerWidth || 400) - 64; return Math.round(Math.max(288, Math.min(780, w))); }
+function bpChartHTML(list, today) {
+  var W = chartW(), H = W < 480 ? 230 : 260, L = 40, R = 40, T = 16, B = 34, from = DG.addDays(today, -13), step = W < 480 ? 4 : 2;
+  var t0 = Date.parse(from + 'T00:00:00Z') - 7 * 3600000, t1 = Date.parse(today + 'T00:00:00Z') - 7 * 3600000 + 86400000;
+  var lo = 60, hi = 160;
+  list.forEach(function (e) { lo = Math.min(lo, Math.floor((e.dbp - 5) / 10) * 10); hi = Math.max(hi, Math.ceil((e.sbp + 5) / 10) * 10); });
+  function X(t) { return (L + (Date.parse(t) - t0) / (t1 - t0) * (W - L - R)).toFixed(1); }
+  function Y(v) { return (T + (hi - v) / (hi - lo) * (H - T - B)).toFixed(1); }
+  var g = '';
+  for (var v = Math.ceil(lo / 20) * 20; v <= hi; v += 20) g += '<line class="c-grid" x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(v) + '" y2="' + Y(v) + '"/><text class="ax" x="' + (L - 8) + '" y="' + (+Y(v) + 4) + '" text-anchor="end">' + v + '</text>';
+  for (var i = 13; i >= 0; i -= step) { var day = DG.addDays(from, i), x = X(new Date(Date.parse(day + 'T12:00:00Z') - 7 * 3600000).toISOString()); g += '<text class="ax" x="' + x + '" y="' + (H - 12) + '" text-anchor="middle">' + dvDate(day).slice(0, 5) + '</text>'; }
+  [[130, 'Mục tiêu 130'], [80, 'Mục tiêu 80']].forEach(function (tg) { g += '<line class="c-tg" x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(tg[0]) + '" y2="' + Y(tg[0]) + '"/><text class="ax" x="' + (W - R + 6) + '" y="' + (+Y(tg[0]) + 4) + '">' + tg[0] + '</text>'; });
+  ['sbp', 'dbp'].forEach(function (k, si) {
+    g += '<polyline class="c-l' + si + '" points="' + list.map(function (e) { return X(e.t) + ',' + Y(e[k]); }).join(' ') + '"/>';
+    g += list.map(function (e) { return '<circle class="c-p' + si + '" cx="' + X(e.t) + '" cy="' + Y(e[k]) + '" r="5"/>'; }).join('');
+  });
+  var last = list[list.length - 1];
+  g += list.map(function (e, j) { return '<circle class="c-hit" data-tip="' + j + '" cx="' + X(e.t) + '" cy="' + ((+Y(e.sbp) + +Y(e.dbp)) / 2).toFixed(1) + '" r="18"><title>' + esc(dvDate(DG.dayOf(e)).slice(0, 5) + ' ' + localTime(e.t) + ': ' + e.sbp + '/' + e.dbp) + '</title></circle>'; }).join('');
+  var lg = '<div class="legend"><span><i class="lg0"></i>Số trên</span><span><i class="lg1"></i>Số dưới</span><span><i class="tg"></i>Mục tiêu dưới 130/80</span></div>';
+  var tips = list.map(function (e) { return [((+X(e.t)) / W * 100).toFixed(2), ((+Y(e.sbp)) / H * 100).toFixed(2), dvDate(DG.dayOf(e)).slice(0, 5) + ', ' + localTime(e.t) + ': ' + e.sbp + '/' + e.dbp + (e.hr ? ', mạch ' + e.hr : '')]; });
+  return lg + '<div class="chart-wrap" data-tips="' + esc(JSON.stringify(tips)) + '"><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Huyết áp 14 ngày qua, ' + list.length + ' lần đo; lần gần nhất ' + last.sbp + '/' + last.dbp + '">' + g + '</svg><div class="ctip" hidden></div></div>' +
+    '<p class="small muted">Lần gần nhất: <b>' + last.sbp + '/' + last.dbp + '</b> mmHg. Chạm vào điểm để xem số.</p>';
+}
+function showTip(j, el) {
+  var wrap = el.closest('.chart-wrap'), tips = JSON.parse(wrap.getAttribute('data-tips')), tip = wrap.querySelector('.ctip'), t = tips[j]; if (!t) return;
+  tip.textContent = t[2]; tip.hidden = false;
+  var w = wrap.clientWidth, half = tip.offsetWidth / 2 + 4, x = +t[0] / 100 * w, y = +t[1] / 100 * wrap.clientHeight;
+  tip.style.left = Math.max(half, Math.min(w - half, x)) + 'px'; tip.style.top = Math.max(tip.offsetHeight + 6, y) + 'px';
+}
+function historyHTML() {
+  var today = DG.todayVN(), es = mine().entries.filter(sendable).slice().sort(function (a, b) { return a.t < b.t ? 1 : -1; });
+  var h = '<div class="sec-head"><h2>Lịch sử</h2><p>Các lần nhập trên điện thoại này. Nhập sai thì bấm Sửa hoặc Xoá; hệ thống của ' + DOC + ' cũng được cập nhật theo.</p></div>';
+  var bps = es.filter(function (e) { return e.type === 'bp' && DG.dayOf(e) >= DG.addDays(today, -13); }).reverse();
+  if (bps.length >= 2) h += '<section class="card stack"><div class="card-head"><h3>' + ic('cuff') + 'Huyết áp 14 ngày qua</h3></div>' + bpChartHTML(bps, today) + '</section>';
+  var days = {}, order = [];
+  es.forEach(function (e) { var d = DG.dayOf(e); if (!days[d]) { days[d] = []; order.push(d); } days[d].push(e); });
+  order.sort().reverse();
+  if (!order.length) return h + '<section class="card"><p>Chưa có số đo nào. Bấm Nhập số đo ở thanh dưới để bắt đầu.</p></section>';
+  h += '<div class="hist">' + order.slice(0, ST.histDays).map(function (d) {
+    var items = days[d].sort(function (a, b) { return a.type === 'habit' ? 1 : b.type === 'habit' ? -1 : a.t < b.t ? 1 : -1; });
+    return '<section class="card hday"><h3>' + esc(dvLongDate(d)) + '</h3><ul class="hitems">' + items.map(function (e) {
+      var del = ST.del === e.id;
+      return '<li class="hitem"><span class="hi-ic">' + ic(TYPE_IC[e.type] || 'note') + '</span><div class="hi-t"><b>' + esc(valueText(e)) + '</b><small>' + esc(e.type === 'habit' ? 'Thói quen trong ngày' : 'Lúc ' + localTime(e.t)) + (e.note ? '; ' + esc(e.note) : '') + (e.rev > 1 && e.type !== 'habit' ? '; đã sửa' : '') + '</small></div>' +
+        '<div class="hi-act">' + syncChip(e) + '<span class="hi-btns">' + (e.type !== 'habit' && !del ? '<button type="button" class="btn btn-ghost" data-edit="' + esc(e.id) + '">' + ic('note', 'sm') + 'Sửa</button>' : '') +
+        '<button type="button" class="btn ' + (del ? 'btn-danger' : 'btn-ghost') + '" data-del="' + esc(e.id) + '">' + ic('trash', 'sm') + (del ? 'Bấm lần nữa để xoá' : 'Xoá') + '</button></span></div></li>';
+    }).join('') + '</ul></section>';
+  }).join('') + '</div>';
+  if (order.length > ST.histDays) h += '<button type="button" class="btn" data-act="more">Xem thêm ngày cũ</button>';
+  return h + '<p class="small muted">' + (SYNC.storeStatus(ST.pid).tok && !SYNC.storeStatus(ST.pid).bad ? 'Lịch sử này giống nhau trên mọi điện thoại mở bằng liên kết riêng của ' + pron() + '. ' + DOC + ' cũng xem được mọi lần nhập.'
+    : DOC + ' xem được mọi lần nhập, kể cả từ điện thoại khác; trang này chỉ hiện các lần nhập trên điện thoại đang dùng.') + '</p>';
+}
+function delEntry(id) {
+  if (ST.del !== id) { ST.del = id; clearTimeout(ST.delTimer); ST.delTimer = setTimeout(function () { ST.del = null; if (ST.screen === 'history') render(); }, 6000); render(); return; }
+  var p = mine(), e = findEntry(id);
+  p.entries = p.entries.filter(function (x) { return x.id !== id; }); delete p.sent[id];
+  if (e) { e.rev = (e.rev || 1) + 1; SYNC.put(ST.pid, e, 'delete', 0); }   // bản xoá mang số lần sửa cao nhất
+  ST.del = null; persist(); toast('Đã xoá'); render();
+}
+
+/* ---------- khung trang ---------- */
+function chooserHTML() {
+  return '<section class="chooser"><h2>Ai đang dùng sổ này?</h2><p class="muted">Mỗi người có sổ riêng; nhiều người dùng chung một điện thoại vẫn được.</p><div class="who-grid">' +
+    PEOPLE_IDS.map(function (p) { return '<button type="button" class="who" data-who="' + p + '"><span class="av">' + ic('person') + '</span>' + esc(CONF.people[p].greet) + '</button>'; }).join('') + '</div></section>';
+}
+function footHTML() {
+  if (EMBED) return '';
+  return '<footer class="foot"><span>Trang này không chứa hồ sơ bệnh án. Số đo ' + pron() + ' nhập được gửi về hệ thống theo dõi của ' + DOC + ' khi bấm Lưu' + (DOC_ZALO ? '; Zalo của ' + DOC + ': ' + zaloFmt(DOC_ZALO) : '') + '.</span><span>Cấp cứu: gọi 115. ' + (CONF.page_version ? 'Phiên bản ' + esc(CONF.page_version) + ', c' : 'C') + 'ập nhật ' + dvDate(CONF.generated) + '.</span></footer>';
+}
+function render() {
+  var y = window.scrollY, m = $('#main'), nav = $('#bnav'), ae = document.activeElement, key = null;
+  if (ae && ae !== document.body) { if (ae.id) key = '#' + ae.id; else { for (var a = ae.attributes, i = 0; i < a.length; i++) if (/^data-/.test(a[i].name)) { key = '[' + a[i].name + '="' + a[i].value.replace(/"/g, '\\"') + '"]'; break; } } }
+  if (!ST.pid) { m.innerHTML = chooserHTML(); nav.hidden = true; $('#who-name').textContent = ''; $('#who-switch').hidden = true; return; }
+  nav.hidden = false; $('#who-switch').hidden = PEOPLE_IDS.length < 2; $('#who-name').textContent = who().greet;
+  var h = ST.screen === 'entry' ? entryHTML() : ST.screen === 'send' ? sendHTML() : ST.screen === 'history' ? historyHTML() : todayHTML();
+  m.innerHTML = '<div class="screen">' + h + footHTML() + '</div>';
+  nav.querySelectorAll('button[data-screen]').forEach(function (b) { if (b.getAttribute('data-screen') === ST.screen) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+  navCount();
+  keepY(y);
+  reportSize();
+  if (key) { try { var el = document.querySelector(key); if (el) el.focus({ preventScroll: true }); } catch (e) { /* focus is a convenience */ } }
+}
+function go(screen) {
+  if (screen !== 'entry' || ST.screen === 'entry') endEdit();
+  ST.screen = screen; ST.errs = {}; ST.del = null;
+  if (screen !== 'entry') ST.result = null;
+  render(); toTop();
+}
+function choose(pid) { endEdit(); ST.pid = pid; ST.screen = 'today'; ST.result = null; ST.celebrate = null; ST.form = {}; ST.errs = {}; persist(); render(); toTop(); }
+
+document.addEventListener('click', function (ev) {
+  var za = ev.target.closest && ev.target.closest('a[data-zalo]'); if (za) { zaloCopy(); return; }   // the link itself then opens the chat
+  var b = ev.target.closest('button, [data-tip]'); if (!b) return;
+  var d = b.dataset || {};
+  if (d.tip != null) { showTip(+d.tip, b); return; }
+  if (d.who) { choose(d.who); return; }
+  if (b.id === 'who-switch') { ST.pid = null; render(); toTop(); return; }
+  if (d.screen) { go(d.screen); return; }
+  if (d.goEntry) { ST.kind = d.goEntry; ST.result = null; go('entry'); return; }
+  if (d.habit) { toggleHabit(d.habit); return; }
+  if (d.kind) { ST.kind = d.kind; ST.errs = {}; ST.result = null; render(); return; }
+  if (d.arm) { F().arm = d.arm; render(); return; }
+  if (d.pain != null) { F().pain = +d.pain; delete ST.errs.pain; render(); return; }
+  if (d.loc) { toggleIn(F().loc, d.loc); render(); return; }
+  if (d.pk) { toggleIn(F().kind, d.pk); render(); return; }
+  if (d.ctx) { F().ctx = d.ctx; render(); return; }
+  if (d.sym) { toggleIn(F().sym, d.sym); delete ST.errs.sym; render(); return; }
+  if (d.sev) { F().sev = F().sev === d.sev ? '' : d.sev; render(); return; }
+  if (d.del) { delEntry(d.del); return; }
+  if (d.edit) { startEdit(d.edit); return; }
+  var act = d.act;
+  if (act === 'cel-close') { ST.celebrate = null; render(); }
+  else if (act === 'result-close') { ST.result = null; render(); }
+  else if (act === 'when-edit') { var p = localParts(new Date()); ST.when = { edit: true, date: p.date, time: p.time }; render(); }
+  else if (act === 'when-now') { ST.when = { edit: false, date: '', time: '' }; delete ST.errs.when; render(); }
+  else if (act === 'edit-cancel') { endEdit(); go('history'); }
+  else if (act === 'copy') doCopy();
+  else if (act === 'sync-retry') { SYNC.retry(); toast('Đang gửi lại'); setTimeout(render, 400); }
+  else if (act === 'sync-ack') { SYNC.state().ack = new Date().toISOString(); persist(); render(); }
+  else if (act === 'more') { ST.histDays += 21; render(); }
+});
+document.addEventListener('pointerover', function (ev) { var t = ev.target.closest && ev.target.closest('[data-tip]'); if (t && ev.pointerType === 'mouse') showTip(+t.getAttribute('data-tip'), t); });
+document.addEventListener('input', function (ev) {
+  var t = ev.target;
+  if (t.dataset && t.dataset.f) { F()[t.dataset.f] = t.value; if (ST.errs[t.dataset.f]) { delete ST.errs[t.dataset.f]; var l = t.closest('.numf'); if (l) l.classList.remove('bad'); } }
+  if (t.dataset && t.dataset.w) ST.when[t.dataset.w] = t.value;
+});
+document.addEventListener('change', function (ev) { if (ev.target.id === 'resend') { ST.resend = ev.target.checked; render(); } });
+document.addEventListener('submit', function (ev) { if (ev.target.id === 'f-entry') { ev.preventDefault(); saveEntry(); } });
+document.addEventListener('visibilitychange', function () { if (!document.hidden && ST.pid && ST.screen !== 'entry') render(); });
+window.addEventListener('hashchange', function () { var p = takeHash(); if (p && p !== ST.pid) choose(p); });
+(function init() {
+  var o = load(), p = takeHash();
+  ST.pid = p || (o && CONF.people[o.last] ? o.last : null) || (PEOPLE_IDS.length === 1 ? PEOPLE_IDS[0] : null);
+  SYNC.reconcile(ST.data);   // mục nào chưa chắc đã tới hệ thống thì xếp gửi lại
+  persist();
+  render();
+  SYNC.retry();
+})();
+
+</script>
+</body>
+</html>

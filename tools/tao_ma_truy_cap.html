@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>Tạo mã truy cập Sổ đo</title>
+<style>
+  :root { --bg: #f6f4ef; --fg: #1f2328; --mut: #5b6470; --line: #d9d4c8; --card: #ffffff; --acc: #1d5c63; --warn: #8a4b08; --warnbg: #fbf0dd; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #16191c; --fg: #e8e6e1; --mut: #a2a9b0; --line: #343a40; --card: #1e2326; --acc: #6fc3cb; --warn: #f0b768; --warnbg: #34270f; color-scheme: dark; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.55 Arial, "Times New Roman", sans-serif; }
+  main { max-width: 860px; margin: 0 auto; padding: 24px max(16px, env(safe-area-inset-left)) 48px; }
+  h1 { font-size: 22px; margin: 0 0 6px; }
+  h2 { font-size: 17px; margin: 0 0 8px; }
+  p { margin: 0 0 10px; }
+  .mut { color: var(--mut); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px; margin: 14px 0; }
+  .warn { background: var(--warnbg); color: var(--warn); border-color: var(--warn); }
+  label { display: block; font-size: 13px; color: var(--mut); margin: 8px 0 2px; }
+  input[type=text] { width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--fg); font: inherit; }
+  .row { display: grid; grid-template-columns: 90px 1fr 1fr; gap: 8px; align-items: end; }
+  @media (max-width: 560px) { .row { grid-template-columns: 1fr; } }
+  button { font: inherit; padding: 8px 14px; border-radius: 6px; border: 1px solid var(--acc); background: var(--acc); color: #fff; cursor: pointer; }
+  @media (prefers-color-scheme: dark) { button { color: #0d1214; } }
+  button.ghost { background: transparent; color: var(--acc); }
+  button.sm { padding: 4px 10px; font-size: 13px; }
+  .out { font-family: "Courier New", monospace; font-size: 13px; word-break: break-all; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; margin: 4px 0 10px; }
+  .k { font-size: 13px; color: var(--mut); margin-top: 6px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  td, th { text-align: left; border-bottom: 1px solid var(--line); padding: 6px 8px; vertical-align: top; }
+  .sr { position: absolute; left: -9999px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Tạo mã truy cập Sổ đo</h1>
+  <p class="mut">Trang này chạy hoàn toàn trên máy của BS Trung. Nó không gửi gì đi đâu, không lưu gì, không kết nối mạng. Mã sinh ra bằng bộ sinh số ngẫu nhiên của trình duyệt; tắt trang là mất mã, nên chép ngay vào nơi cất mật khẩu của BS Trung.</p>
+
+  <div class="card warn">
+    <p><b>Hai thứ khác nhau, đừng nhầm.</b></p>
+    <p>Mã truy cập là thứ giữ bí mật: chỉ gửi cho đúng người của mã đó qua liên kết riêng, và giữ một bản trong nơi cất mật khẩu của BS Trung. Mã băm là dấu vân tay của mã: dán vào biến môi trường trên Netlify để máy chủ nhận ra mã đúng. Mã băm không dùng để vào trang, nên dán lên Netlify là an toàn; mã truy cập thì không bao giờ dán lên Netlify, GitHub hay vào tệp nào trong kho.</p>
+  </div>
+
+  <div class="card">
+    <h2>1. Địa chỉ và người dùng</h2>
+    <label for="base">Địa chỉ trang (không có dấu gạch chéo ở cuối)</label>
+    <input type="text" id="base" value="https://imghealthcarepro.netlify.app" autocomplete="off" spellcheck="false">
+    <div id="people"></div>
+    <p class="mut" style="margin-top:10px">Mã người (LTM, DTG) và đoạn nhận diện trong liên kết (minh, giang) phải khớp với cấu hình của trang. Chỉ đổi nếu cấu hình của trang đã đổi.</p>
+    <p><button type="button" id="gen">Sinh mã mới cho tất cả</button> <button type="button" class="ghost" id="addTest">Thêm một người thử (TEST)</button></p>
+  </div>
+
+  <div id="results"></div>
+
+  <div class="card">
+    <h2>Chỉ tính mã băm của một mã đã có</h2>
+    <label for="have">Dán mã truy cập</label>
+    <input type="text" id="have" autocomplete="off" spellcheck="false">
+    <div class="out" id="haveOut" style="margin-top:8px">Mã băm sẽ hiện ở đây.</div>
+  </div>
+
+  <div class="card">
+    <h2>Việc cần làm sau khi sinh mã</h2>
+    <table>
+      <tr><th>Việc</th><th>Làm ở đâu</th></tr>
+      <tr><td>Dán mã băm vào các biến môi trường</td><td>Netlify, project imghealthcarepro, Site configuration, Environment variables. Phạm vi chọn Functions, đánh dấu là secret. Tên biến ghi ở từng mục bên trên. Sau đó triển khai lại một lần để biến có hiệu lực.</td></tr>
+      <tr><td>Gửi liên kết Sổ đo cho chú và dì</td><td>Zalo. Mỗi người một liên kết riêng, dặn đừng chuyển cho người khác.</td></tr>
+      <tr><td>Mở liên kết quản lý một lần trên máy của BS Trung</td><td>Liên kết có chữ admin: máy đó nhớ mã đọc, bảng theo dõi đọc số trực tiếp từ kho, không cần đồng bộ tệp CSV.</td></tr>
+      <tr><td>Mở liên kết Sổ đo của từng người một lần trên máy của BS Trung</td><td>Để BS Trung nhập hộ khi chú dì báo số qua điện thoại; nút Gửi liên kết trong bảng tự gắn mã vào liên kết gửi đi.</td></tr>
+      <tr><td>Đổi mã khi mất điện thoại hay lộ liên kết</td><td>Sinh mã mới cho người đó, thay biến môi trường của người đó, triển khai lại, gửi liên kết mới. Mã cũ hết hiệu lực ngay sau khi triển khai.</td></tr>
+    </table>
+  </div>
+</main>
+<script>
+(function () {
+  /* SHA-256 viết tay để chạy được cả khi trình duyệt chặn bộ mã hoá ở trang mở từ ổ đĩa. Đã đối chiếu với bộ mã hoá của Node trên 1000 chuỗi ngẫu nhiên. */
+  var K = [0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  function rotr(x, n) { return (x >>> n) | (x << (32 - n)); }
+  function sha256hex(str) {
+    var b = []; for (var i = 0; i < str.length; i++) { var c = str.charCodeAt(i); if (c < 128) b.push(c); else if (c < 2048) b.push(192 | c >> 6, 128 | c & 63); else b.push(224 | c >> 12, 128 | (c >> 6) & 63, 128 | c & 63); }
+    var len = b.length; b.push(0x80); while (b.length % 64 !== 56) b.push(0);
+    var hi = Math.floor(len * 8 / 4294967296), lo = (len * 8) >>> 0;
+    b.push(hi >>> 24 & 255, hi >>> 16 & 255, hi >>> 8 & 255, hi & 255, lo >>> 24 & 255, lo >>> 16 & 255, lo >>> 8 & 255, lo & 255);
+    var H = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+    for (var o = 0; o < b.length; o += 64) {
+      var w = new Array(64), j;
+      for (j = 0; j < 16; j++) w[j] = (b[o + 4 * j] << 24) | (b[o + 4 * j + 1] << 16) | (b[o + 4 * j + 2] << 8) | b[o + 4 * j + 3];
+      for (j = 16; j < 64; j++) { var s0 = rotr(w[j - 15], 7) ^ rotr(w[j - 15], 18) ^ (w[j - 15] >>> 3), s1 = rotr(w[j - 2], 17) ^ rotr(w[j - 2], 19) ^ (w[j - 2] >>> 10); w[j] = (w[j - 16] + s0 + w[j - 7] + s1) | 0; }
+      var a = H[0], bb = H[1], cc = H[2], d = H[3], e = H[4], f = H[5], g = H[6], h = H[7];
+      for (j = 0; j < 64; j++) {
+        var S1 = rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25), ch = (e & f) ^ (~e & g), t1 = (h + S1 + ch + K[j] + w[j]) | 0;
+        var S0 = rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22), mj = (a & bb) ^ (a & cc) ^ (bb & cc), t2 = (S0 + mj) | 0;
+        h = g; g = f; f = e; e = (d + t1) | 0; d = cc; cc = bb; bb = a; a = (t1 + t2) | 0;
+      }
+      H[0] = (H[0] + a) | 0; H[1] = (H[1] + bb) | 0; H[2] = (H[2] + cc) | 0; H[3] = (H[3] + d) | 0; H[4] = (H[4] + e) | 0; H[5] = (H[5] + f) | 0; H[6] = (H[6] + g) | 0; H[7] = (H[7] + h) | 0;
+    }
+    return H.map(function (x) { return ('00000000' + (x >>> 0).toString(16)).slice(-8); }).join('');
+  }
+  function newToken() {
+    var a = new Uint8Array(24); crypto.getRandomValues(a);
+    var s = ''; for (var i = 0; i < a.length; i++) s += String.fromCharCode(a[i]);
+    return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  var people = [{ id: 'LTM', slug: 'minh', name: 'Chú Minh' }, { id: 'DTG', slug: 'giang', name: 'Dì Giang' }];
+  var tokens = {};   // chỉ nằm trong bộ nhớ của trang này
+  function drawPeople() {
+    document.getElementById('people').innerHTML = people.map(function (p, i) {
+      return '<div class="row"><div><label>Mã người</label><input type="text" data-i="' + i + '" data-f="id" value="' + esc(p.id) + '"></div>' +
+        '<div><label>Đoạn nhận diện trong liên kết</label><input type="text" data-i="' + i + '" data-f="slug" value="' + esc(p.slug) + '"></div>' +
+        '<div><label>Cách gọi</label><input type="text" data-i="' + i + '" data-f="name" value="' + esc(p.name) + '"></div></div>';
+    }).join('');
+  }
+  function base() { return String(document.getElementById('base').value || '').trim().replace(/\/+$/, ''); }
+  function block(title, envName, key, links) {
+    var t = tokens[key]; if (!t) return '';
+    var h = sha256hex(t);
+    return '<div class="card"><h2>' + esc(title) + '</h2>' +
+      '<div class="k">Mã truy cập, giữ bí mật <button type="button" class="sm ghost" data-copy="' + esc(t) + '">Chép</button></div><div class="out">' + esc(t) + '</div>' +
+      '<div class="k">Biến môi trường <b>' + esc(envName) + '</b>, giá trị là mã băm <button type="button" class="sm ghost" data-copy="' + esc(h) + '">Chép</button></div><div class="out">' + esc(h) + '</div>' +
+      links.map(function (l) { return '<div class="k">' + esc(l[0]) + ' <button type="button" class="sm ghost" data-copy="' + esc(l[1]) + '">Chép liên kết</button></div><div class="out">' + esc(l[1]) + '</div>'; }).join('') + '</div>';
+  }
+  function draw() {
+    var b = base(), out = '';
+    people.forEach(function (p) {
+      var id = p.id.toUpperCase();
+      out += block(p.name + ' (' + id + ')', 'SODO_HASH_' + id, id, [
+        ['Liên kết Sổ đo, gửi cho ' + p.name.toLowerCase(), b + '/so-do/#' + p.slug + '.' + tokens[id]],
+        ['Liên kết hồ sơ của riêng ' + p.name.toLowerCase() + ' (chỉ xem phần của người đó)', b + '/#' + p.slug + '.' + tokens[id]]]);
+    });
+    out += block('Quản lý, chỉ đọc', 'SODO_HASH_ADMIN', 'ADMIN', [['Liên kết quản lý, mở một lần trên máy của BS Trung', b + '/#admin.' + tokens.ADMIN]]);
+    if (tokens.TEST) out += block('Người thử TEST, xoá sau khi thử xong', 'SODO_HASH_TEST', 'TEST', [['Liên kết thử, không dùng cho người thật', b + '/so-do/#thu.' + tokens.TEST]]);
+    if (out) {
+      var ids = people.map(function (p) { return p.id.toUpperCase(); });
+      out = '<div class="card"><h2>Biến SODO_PEOPLE</h2><p>Dán giá trị này vào biến môi trường SODO_PEOPLE (không phải bí mật):</p><div class="out">' + esc(ids.join(',') + (tokens.TEST ? ',TEST' : '')) + '</div>' +
+        (tokens.TEST ? '<p class="mut">Có người TEST: thêm biến SODO_PURGEABLE với giá trị TEST để máy chủ cho phép xoá sạch dữ liệu thử. Sau khi thử xong, bỏ TEST khỏi SODO_PEOPLE và xoá biến SODO_HASH_TEST.</p>' : '') + '</div>' + out;
+    }
+    document.getElementById('results').innerHTML = out;
+  }
+  document.getElementById('people').addEventListener('input', function (ev) {
+    var t = ev.target, i = t.getAttribute('data-i'), f = t.getAttribute('data-f'); if (i == null) return;
+    var v = String(t.value || '').trim(); if (f === 'id') v = v.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12); if (f === 'slug') v = v.toLowerCase().replace(/[^a-z0-9-]/g, '');
+    var old = people[i].id; people[i][f] = v;
+    if (f === 'id' && tokens[old] && old !== v) { tokens[v] = tokens[old]; delete tokens[old]; }
+    draw();
+  });
+  document.getElementById('base').addEventListener('input', draw);
+  document.getElementById('gen').addEventListener('click', function () {
+    var had = tokens.TEST; tokens = {};
+    people.forEach(function (p) { tokens[p.id.toUpperCase()] = newToken(); }); tokens.ADMIN = newToken(); if (had) tokens.TEST = newToken();
+    draw();
+  });
+  document.getElementById('addTest').addEventListener('click', function () { tokens.TEST = newToken(); if (!tokens.ADMIN) { people.forEach(function (p) { tokens[p.id.toUpperCase()] = newToken(); }); tokens.ADMIN = newToken(); } draw(); });
+  document.getElementById('have').addEventListener('input', function (ev) {
+    var v = String(ev.target.value || '').trim();
+    document.getElementById('haveOut').textContent = v ? sha256hex(v) : 'Mã băm sẽ hiện ở đây.';
+  });
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-copy]'); if (!b) return;
+    var text = b.getAttribute('data-copy'), done = function () { var o = b.textContent; b.textContent = 'Đã chép'; setTimeout(function () { b.textContent = o; }, 1400); };
+    var ta = document.createElement('textarea'); ta.value = text; ta.style.cssText = 'position:fixed;top:0;left:-9999px;opacity:0'; document.body.appendChild(ta); ta.select();
+    try { if (document.execCommand('copy')) { ta.remove(); done(); return; } } catch (e) { /* thử cách khác */ }
+    ta.remove(); if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () {});
+  });
+  window.__sha256hex = sha256hex;   // dùng cho bộ thử tự động, không ảnh hưởng gì khi dùng thường
+  drawPeople();
+})();
+</script>
+</body>
+</html>

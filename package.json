@@ -1,0 +1,16 @@
+{
+  "name": "imghealthcarepro",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "So do tai nha + bang theo doi suc khoe (ca nhan). Tinh + Netlify Function so-do.",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@netlify/blobs": "11.1.9"
+  },
+  "scripts": {
+    "test": "node --test \"test/*.test.mjs\""
+  }
+}
